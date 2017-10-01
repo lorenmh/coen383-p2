@@ -3,7 +3,7 @@
 #include <string.h>
 #include "minheap.h"
 
-heap_t* create_heap() {
+heap_t *create_heap() {
 	heap_t *h = malloc(sizeof(heap_t));
 
 	h->size = 0;
