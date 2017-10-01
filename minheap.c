@@ -77,6 +77,8 @@ void *extract(heap_t *h) {
 		node_t *child0 = child0_index < h->size ? &buf[child0_index] : NULL;
 		node_t *child1 = child1_index < h->size ? &buf[child1_index] : NULL;
 
+		if (child0 == NULL) break;
+
 		// we only compare with the smallest child and swap if its smaller
 		node_t compared;
 		uint16_t compared_index = -1;
