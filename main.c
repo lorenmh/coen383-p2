@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "minheap.h"
 
 // function prototypes
@@ -28,6 +29,25 @@ int main(int argc, char* argv[]) {
 		printf("extracted: %d, heap: ", extracted);
 		print(h);
 	}
+
+	uint64_t arr[] = { 10, 2, 6, 8, 4, 1, 3, 5, 9, 7 };
+
+	printf("unsorted arr: [ ");
+	for (int i = 0; i < 10; i++) {
+		insert(h, arr[i], (void *) arr[i]);
+		printf("%d ", (int) arr[i]);
+	}
+	printf("]\n");
+
+	for (int i = 0; i < 10; i++) {
+		arr[i] = (int) extract(h);
+	}
+
+	printf("sorted arr: [ ");
+	for (int i = 0; i < 10; i++) {
+		printf("%d ", (int) arr[i]);
+	}
+	printf("]\n");
 
 	free_heap(h);
 

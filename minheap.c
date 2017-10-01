@@ -29,7 +29,7 @@ void insert(heap_t *h, uint32_t key, void *value) {
 	// resize the heap's buffer
 	if (h->size + 1 >= h->buf_size) {
 		h->buf_size = h->buf_size * MINHEAP_BUF_RESIZE_FACTOR;
-		h->buf = realloc(h->buf, h->buf_size);
+		h->buf = realloc(h->buf, h->buf_size * sizeof(node_t));
 	}
 
 	uint16_t index = h->size++;
