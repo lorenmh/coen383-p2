@@ -56,7 +56,7 @@ process_queue_t *create_process_queue(int size) {
     }
 
     // priority
-    RandNum_set_parameter(time(NULL), 0, MAX_PRIORITY);
+    RandNum_set_parameter(time(NULL), MIN_PRIORITY, MAX_PRIORITY);
     for (int i = 0; i < size; ++i) {
         newProcessArray[i].priority = RandNum_get_random();
     }

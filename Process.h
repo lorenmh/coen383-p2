@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 
+#define MIN_PRIORITY 1
 #define MAX_PRIORITY 4
 #define MAX_ACCEPTABLE_ARRIVAL_TIME 99
 #define MAX_SERVICE_TIME 20
