@@ -1,5 +1,6 @@
 #include "Process.h"
 #include <stdlib.h>
+#include <stdio.h>
 #include "RandomNumberGenerator.h"
 #include <time.h>
 #include <string.h>
@@ -11,6 +12,27 @@ int process_comparator(const void* p1, const void* p2) {
     return (int)(p1_arrival - p2_arrival);
 }
 
+
+void print_process(process_t const *p) {
+    printf(
+        "{id: %d, at: %d, st: %d, p: %d, rt: %d, cst: %d}",
+        p->id,
+        p->arrival_time,
+        p->service_time,
+        p->priority,
+        p->remaining_time,
+        p->context_switch_time
+    );
+}
+
+void print_process_queue(process_queue_t const *pq) {
+	printf("[ ");
+	for (int i = 0; i < pq->size; i++) {
+		print_process(&pq->entry[i]);
+		printf(" ");
+	}
+	printf("]");
+}
 
 process_queue_t *create_process_queue(int size) {
     process_t *newProcessArray = malloc(sizeof(process_t) * size);
