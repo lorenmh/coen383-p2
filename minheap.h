@@ -13,12 +13,12 @@ void print(heap_t*);
 int is_empty(heap_t*);
 void free_heap(heap_t*);
 
-typedef struct node_t {
+typedef struct {
 	uint32_t key;
 	void *value;
 } node_t;
 
-typedef struct heap_t {
+typedef struct {
 	uint16_t size;
 	uint16_t buf_size;
 	node_t *buf;
