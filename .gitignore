@@ -3,3 +3,11 @@
 *.sw[op]
 *.o
 *.bin
+
+.xcodeproj
+*.xcuserstate
+project.xcworkspace/
+xcuserdata/
+
+.gitignore
+*.pbxproj
