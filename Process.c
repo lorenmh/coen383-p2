@@ -13,23 +13,23 @@ int process_comparator(const void* p1, const void* p2) {
 }
 
 
-void print_process(process_t const *p) {
+void print_process(process_t const *process) {
     printf(
         "{id: %d\t\tat: %d,\t\tst: %d\t\tp: %d\t\trt: %d\t\tcst: %d}",
-        p->id,
-        p->arrival_time,
-        p->service_time,
-        p->priority,
-        p->remaining_time,
-        p->context_switch_time
+        process->id,
+        process->arrival_time,
+        process->service_time,
+        process->priority,
+        process->remaining_time,
+        process->context_switch_time
     );
 }
 
-void print_process_queue(process_queue_t const *pq) {
+void print_process_queue(process_queue_t const *process_queue) {
 	printf("[ ");
-	for (int i = 0; i < pq->size; i++) {
+	for (int i = 0; i < process_queue->size; i++) {
 		printf("\t");
-		print_process(&pq->entry[i]);
+		print_process(&process_queue->entry[i]);
 		printf("\n");
 	}
 	printf("]\n");

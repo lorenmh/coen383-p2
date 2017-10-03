@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "minheap.h"
+#include "MinHeap.h"
 #include "Process.h"
 
 
@@ -17,12 +17,12 @@ int main(int argc, char* argv[]) {
 	insert(h, 4, (void *)4);
 
 	printf("initial heap: ");
-	print(h);
+	print_heap(h);
 
 	while (!is_empty(h)) {
 		int extracted = (int) extract(h);
 		printf("extracted: %d, heap: ", extracted);
-		print(h);
+		print_heap(h);
 	}
 
 	uint64_t arr[] = { 10, 2, 6, 8, 4, 1, 3, 5, 9, 7 };

@@ -21,7 +21,7 @@ typedef struct {
 heap_t *create_heap(void);
 void insert(heap_t*, uint32_t, void*);
 void *extract(heap_t*);
-void print(heap_t*);
+void print_heap(heap_t*);
 int is_empty(heap_t*);
 void free_heap(heap_t*);
 

@@ -1,8 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "minheap.h"
+#include "MinHeap.h"
 
+/**
+ * Creates the min heap
+ *
+ * @param void
+ */
 heap_t *create_heap(void) {
 	heap_t *h = malloc(sizeof(heap_t));
 
@@ -13,7 +18,12 @@ heap_t *create_heap(void) {
 	return h;
 }
 
-void print(heap_t *h) {
+/**
+ * Creates the min heap
+ *
+ * @param void
+ */
+void print_heap(heap_t *h) {
 	for (int i = 0; i < h->size; i++) {
 		node_t *curr = &h->buf[i];
 		printf("{k: %d, v: %p} ", curr->key, curr->value);

@@ -2,7 +2,7 @@ CC=gcc
 CFLAGS=-std=c99
 CMD=$(CC) $(CFLAGS)
 
-all: main.o minheap.o Process.o RandomNumberGenerator.o
+all: main.o MinHeap.o Process.o RandomNumberGenerator.o
 	$(CMD) main.o minheap.o Process.o RandomNumberGenerator.o -o app.bin
 
 main.o: main.c
@@ -17,5 +17,5 @@ RandomNumberGenerator.o: RandomNumberGenerator.c
 main.o: main.c
 	$(CMD) -c main.c
 
-minheap.o: minheap.c
-	$(CMD) -c minheap.c
+minheap.o: MinHeap.c
+	$(CMD) -c MinHeap.c

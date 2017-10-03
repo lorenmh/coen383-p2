@@ -47,8 +47,22 @@ process_queue_t *create_process_queue(int size);
  * @param process_queue pointer to the queue need to be free
 */
 void free_process_queue(process_queue_t *process_queue);
-void print_process(process_t const *p);
-void print_process_queue(process_queue_t const *pq);
+
+
+/**
+ * print information about a process
+ *
+ * @param process pointer to a process to print
+*/
+void print_process(process_t const *process);
+
+
+/**
+ * print all processes in a process queue
+ *
+ * @param process_queue pointer to the queue to be printed
+*/
+void print_process_queue(process_queue_t const *process_queue);
 
 
 /**
