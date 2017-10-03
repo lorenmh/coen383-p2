@@ -3,6 +3,10 @@
 
 #include <stdint.h>
 
+#define MAX_PRIORITY 4
+#define MAX_ACCEPTABLE_ARRIVAL_TIME 99
+#define MAX_SERVICE_TIME 20
+
 
 typedef struct {
     uint32_t id;
@@ -11,26 +15,22 @@ typedef struct {
     uint32_t priority;
 
     uint32_t remaining_time;
-    uint32_t last_execution_time;
+    uint32_t context_switch_time;
 } process_t;
-
-struct process_queue_node_t {
-    process_t process;
-    struct process_queue_node_t *next;
-};
 
 
 typedef struct {
-    struct process_queue_node_t *entry;
+    process_t *entry;
+    uint32_t size;
 
 } process_queue_t;
 
 
 /**
- * create a process queue and soted it by arrical time
+ * create a process queue and sorted it by arrival time
  *
  * @param size total number of process inside the queue
- * @return pointer to the queue
+ * @return pointer to the queue structure
  */
 process_queue_t *create_process_queue(int size);
 
