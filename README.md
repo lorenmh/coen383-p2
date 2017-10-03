@@ -24,14 +24,15 @@
 # Overview
 
 Here's an overview of one run:
+
 We generate a `process_queue_t` by calling `create_process_queue`. This
 contains ~ 50 processes or whatever. The process values are randomized and the
 queue is sorted by arrival time (this is all done in `create_process_queue`. We
-then copy this process queue 4 times using `copy_process_queue`. Then we pass
-each process queue to a scheduler. For example, we pass the first one to `sjf`,
-the second to `srt`, etc.
+then copy this process queue 5 times using `copy_process_queue`, meaning there
+will now be 6 process queues. These 6 identical process queues are going to be
+sent to each scheduler (FCFS, SJF, etc).
 
-We run the schedulers using that process queue. *The scheduler will modify the
+We run the schedulers using the process queue. *The scheduler will modify the
 process's values in the process queue!* This means to do the analysis we only
 need to look at this process queue, and for each process in there look at the
 execution time, completion time, arrival time, etc.
