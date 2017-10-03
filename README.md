@@ -9,7 +9,7 @@
 
 * `void initialize_process(process_t *p)`: given a pointer to a process, will randomize the values. This is the part where we use rand and all that.
 * `process_queue_t *create_process_queue(int n)`: given n, will malloc a buffer of process\_t's and return its pointer. Will call `randomize_process` for each process. This queue should be sorted by arrival time.
-* `process_queue_t *copy_process_queue(process_queue_t *pq, int n)`: used to copy the process queue
+* `process_queue_t *clone_process_queue(process_queue_t *pq, int n)`: used to copy the process queue
 * `void free_process_queue(process_queue_t *pq)`: frees the memory of the process queue
 
 * `void fcfs(process_queue_t *pq, history_t *h)`: runs FCFS on the process queue, populates history
@@ -28,7 +28,7 @@ Here's an overview of one run:
 We generate a `process_queue_t` by calling `create_process_queue`. This
 contains ~ 50 processes or whatever. The process values are randomized and the
 queue is sorted by arrival time (this is all done in `create_process_queue`). We
-then copy this process queue 5 times using `copy_process_queue`, meaning there
+then copy this process queue 5 times using `clone_process_queue`, meaning there
 will now be 6 process queues. These 6 identical process queues are going to be
 sent to the schedulers (FCFS, SJF, etc). So, we take copy 1 and send it to
 FCFS, we take copy 2 and send it to SJF, etc.
