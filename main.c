@@ -3,7 +3,7 @@
 #include "minheap.h"
 
 // function prototypes
-heap_t *create_heap();
+heap_t *create_heap(void);
 void insert(heap_t*, uint16_t, void*);
 void *extract(heap_t*);
 void print(heap_t*);
