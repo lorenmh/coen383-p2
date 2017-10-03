@@ -3,11 +3,6 @@
 #include <string.h>
 #include "MinHeap.h"
 
-/**
- * Creates the min heap
- *
- * @param void
- */
 heap_t *create_heap(void) {
 	heap_t *h = malloc(sizeof(heap_t));
 
@@ -18,32 +13,27 @@ heap_t *create_heap(void) {
 	return h;
 }
 
-/**
- * Creates the min heap
- *
- * @param void
- */
-void print_heap(heap_t *h) {
-	for (int i = 0; i < h->size; i++) {
-		node_t *curr = &h->buf[i];
+void print_heap(heap_t *heap) {
+	for (int i = 0; i < heap->size; i++) {
+		node_t *curr = &heap->buf[i];
 		printf("{k: %d, v: %p} ", curr->key, curr->value);
 	}
 	printf("\n");
 }
 
-int is_empty(heap_t *h) {
-	return h->size == 0;
+int is_empty(heap_t *heap) {
+	return heap->size == 0;
 }
 
-void insert(heap_t *h, uint32_t key, void *value) {
+void insert(heap_t *heap, uint32_t key, void *value) {
 	// resize the heap's buffer
-	if (h->size + 1 >= h->buf_size) {
-		h->buf_size = h->buf_size * MINHEAP_BUF_RESIZE_FACTOR;
-		h->buf = realloc(h->buf, h->buf_size * sizeof(node_t));
+	if (heap->size + 1 >= heap->buf_size) {
+		heap->buf_size = heap->buf_size * MINHEAP_BUF_RESIZE_FACTOR;
+		heap->buf = realloc(heap->buf, heap->buf_size * sizeof(node_t));
 	}
 
-	uint16_t index = h->size++;
-	node_t *buf = h->buf;
+	uint16_t index = heap->size++;
+	node_t *buf = heap->buf;
 
 	// add element to bottom of heap
 	buf[index] = (node_t) { key, value };
@@ -67,25 +57,25 @@ void insert(heap_t *h, uint32_t key, void *value) {
 	}
 }
 
-void *extract(heap_t *h) {
-	if (is_empty(h)) return NULL;
+void *extract(heap_t *heap) {
+	if (is_empty(heap)) return NULL;
 
-	node_t *buf = h->buf;
+	node_t *buf = heap->buf;
 	void *value = buf[0].value;
 
 	// move last element to root, decrement size
-	node_t swapped = buf[--(h->size)];
+	node_t swapped = buf[--(heap->size)];
 
 	buf[0] = swapped;
 	uint16_t index = 0;
 
-	while (index <= h->size / 2 - 1) {
+	while (index <= heap->size / 2 - 1) {
 		uint16_t child0_index = index * 2 + 1;
 		uint16_t child1_index = index * 2 + 2;
 
 		// NULL for child0 or child1 means that the element does not exist
-		node_t *child0 = child0_index < h->size ? &buf[child0_index] : NULL;
-		node_t *child1 = child1_index < h->size ? &buf[child1_index] : NULL;
+		node_t *child0 = child0_index < heap->size ? &buf[child0_index] : NULL;
+		node_t *child1 = child1_index < heap->size ? &buf[child1_index] : NULL;
 
 		if (child0 == NULL) break;
 
@@ -115,7 +105,7 @@ void *extract(heap_t *h) {
 	return value;
 }
 
-void free_heap(heap_t *h) {
-	free(h->buf);
-	free(h);
+void free_heap(heap_t *heap) {
+	free(heap->buf);
+	free(heap);
 }
