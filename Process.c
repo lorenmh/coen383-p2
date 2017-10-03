@@ -14,12 +14,15 @@ int process_comparator(const void* p1, const void* p2) {
 
 process_queue_t *create_process_queue(int size) {
     process_t *newProcessArray = malloc(sizeof(process_t) * size);
-    // id and arrival time
+    // id and arrival time, other non-random values
     RandNum_set_parameter(time(NULL), 0, MAX_ACCEPTABLE_ARRIVAL_TIME);
     for (int i = 0; i < size; ++i) {
         newProcessArray[i].id = i;
         newProcessArray[i].arrival_time = RandNum_get_random();
+
         newProcessArray[i].context_switch_time = 0;
+        newProcessArray[i].turnaround_time = 0;
+        newProcessArray[i].response_time = INT32_MAX;
     }
 
     // service time

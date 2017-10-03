@@ -16,6 +16,11 @@ typedef struct {
 
     uint32_t remaining_time;  // for shortest remaining time first
     uint32_t context_switch_time;  // for aging
+
+
+    // for result part
+    uint32_t turnaround_time;
+    uint32_t response_time;
 } process_t;
 
 
