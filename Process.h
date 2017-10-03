@@ -14,7 +14,14 @@ typedef struct {
     uint32_t last_execution_time;
 } process_t;
 
+struct process_queue_node_t {
+    process_t process;
+    struct process_queue_node_t *next;
+};
+
+
 typedef struct {
+    struct process_queue_node_t *entry;
 
 } process_queue_t;
 

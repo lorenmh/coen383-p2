@@ -5,10 +5,10 @@ uint32_t RandNum_seed = 0;
 uint32_t RandNum_start = 0;
 uint32_t RandNum_end = RAND_MAX;
 
-void RandNum_set_parameter(int newSeed, int startValue, int endValue) {
-    RandNum_seed = (uint32_t)newSeed;
-    RandNum_start = (uint32_t)startValue;
-    RandNum_end = (uint32_t)endValue;
+void RandNum_set_parameter(int new_seed, int start_value, int end_value) {
+    RandNum_seed = (uint32_t)new_seed;
+    RandNum_start = (uint32_t)start_value;
+    RandNum_end = (uint32_t)end_value;
 }
 
 
