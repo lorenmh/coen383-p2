@@ -1,13 +1,15 @@
 #ifndef RANDOMNUMBERGENERATOR_H
 #define RANDOMNUMBERGENERATOR_H
 
-extern int RandNum_seed;
-extern int RandNum_start;
-extern int RandNum_end;
+#include <stdint.h>
+
+extern uint32_t RandNum_seed;
+extern uint32_t RandNum_start;
+extern uint32_t RandNum_end;
 
 
-void RandNum_setParameter(int newSeed, int startValue, int endValue);
-int RandNum_getRandom(void);
+void RandNum_set_parameter(int newSeed, int startValue, int endValue);
+uint32_t RandNum_get_random(void);
 
 
 

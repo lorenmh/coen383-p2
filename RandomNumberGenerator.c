@@ -1,18 +1,18 @@
 #include "RandomNumberGenerator.h"
 #include <stdlib.h>
 
-int RandNum_seed = 0;
-int RandNum_start = 0;
-int RandNum_end = RAND_MAX;
+uint32_t RandNum_seed = 0;
+uint32_t RandNum_start = 0;
+uint32_t RandNum_end = RAND_MAX;
 
-void RandNum_setParameter(int newSeed, int startValue, int endValue) {
-    RandNum_seed = newSeed;
-    RandNum_start = startValue;
-    RandNum_end = endValue;
+void RandNum_set_parameter(int newSeed, int startValue, int endValue) {
+    RandNum_seed = (uint32_t)newSeed;
+    RandNum_start = (uint32_t)startValue;
+    RandNum_end = (uint32_t)endValue;
 }
 
 
-int RandNum_getRandom(void) {
-    int upperBound = RandNum_end - RandNum_start + 1;
+uint32_t RandNum_get_random(void) {
+    uint32_t upperBound = RandNum_end - RandNum_start + 1;
     return arc4random_uniform(upperBound) + RandNum_start;
 }
