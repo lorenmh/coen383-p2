@@ -47,6 +47,9 @@ int main(int argc, char* argv[]) {
 	free_heap(h);
 
 	process_queue_t *pointer = create_process_queue(100);
+
+	print_process_queue(pointer);
+
 	free_process_queue(pointer);
 
 	return 0;
