@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "minheap.h"
+#include "Process.h"
 
 
 
@@ -44,6 +45,9 @@ int main(int argc, char* argv[]) {
 	printf("]\n");
 
 	free_heap(h);
+
+	process_queue_t *pointer = create_process_queue(100);
+	free_process_queue(pointer);
 
 	return 0;
 }
