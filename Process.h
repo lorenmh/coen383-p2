@@ -14,8 +14,8 @@ typedef struct {
     uint32_t service_time;
     uint32_t priority;
 
-    uint32_t remaining_time;
-    uint32_t context_switch_time;
+    uint32_t remaining_time;  // for shortest remaining time first
+    uint32_t context_switch_time;  // for aging
 } process_t;
 
 
@@ -41,5 +41,15 @@ process_queue_t *create_process_queue(int size);
  * @param process_queue pointer to the queue need to be free
 */
 void free_process_queue(process_queue_t *process_queue);
+
+
+/**
+ * clone an existing process queue
+ *
+ * @param process_queue pointer to the original process queue
+ * @return a pointer to the new process queue or NULL if input is NULL
+ */
+process_queue_t *clone_process_queue(process_queue_t *process_queue);
+
 
 #endif //COEN383_P2_PROCESS_H
