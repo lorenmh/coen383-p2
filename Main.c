@@ -51,7 +51,7 @@ int main(int argc, char* argv[]) {
 
     history_t h = { NULL, 0 };
 
-    fcfs(pq, &h);
+    srt(pq, &h);
 
     print_process_queue(pq);
     printf("%s\n", h.pid);
