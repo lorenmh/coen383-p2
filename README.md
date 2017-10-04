@@ -7,7 +7,6 @@
 
 # Functions
 
-* `void initialize_process(process_t *p)`: given a pointer to a process, will randomize the values. This is the part where we use rand and all that.
 * `process_queue_t *create_process_queue(int n)`: given n, will malloc a buffer of process\_t's and return its pointer. Will call `randomize_process` for each process. This queue should be sorted by arrival time.
 * `process_queue_t *clone_process_queue(process_queue_t *pq, int n)`: used to copy the process queue
 * `void free_process_queue(process_queue_t *pq)`: frees the memory of the process queue
