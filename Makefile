@@ -2,28 +2,27 @@ CC=gcc
 CFLAGS=-std=c99
 CMD=$(CC) $(CFLAGS)
 
-FILES=Main.o MinHeap.o Process.o RandomNumberGenerator.o Output.o Scheduler.o -o app.bin
+COMPILE=$(CMD) -g -c
+
+FILES=Main.o MinHeap.o Process.o RandomNumberGenerator.o Output.o Scheduler.o
 
 all: Main.o MinHeap.o Process.o RandomNumberGenerator.o Output.o Scheduler.o
-	$(CMD) $(FILES) -o app.bin
-
-linux: Main.o MinHeap.o Process.o RandomNumberGenerator.o Output.o Scheduler.o
-	$(CMD) $(FILES) -DLINUX -o app.bin
+	$(CMD) $(FILES) -g -o app.bin
 
 Process.o: Process.c
-	$(CMD) -c Process.c
+	$(COMPILE) Process.c
 
 Output.o: Output.c
-	$(CMD) -c Output.c
+	$(COMPILE) Output.c
 
 Scheduler.o: Scheduler.c
-	$(CMD) -c Scheduler.c
+	$(COMPILE) Scheduler.c
 
 RandomNumberGenerator.o: RandomNumberGenerator.c
-	$(CMD) -c RandomNumberGenerator.c
+	$(COMPILE) RandomNumberGenerator.c
 
 Main.o: Main.c
-	$(CMD) -c Main.c
+	$(COMPILE) Main.c
 
 Minheap.o: MinHeap.c
-	$(CMD) -c MinHeap.c
+	$(COMPILE) MinHeap.c
