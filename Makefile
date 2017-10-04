@@ -3,7 +3,7 @@ CFLAGS=-std=c99
 CMD=$(CC) $(CFLAGS)
 
 all: Main.o MinHeap.o Process.o RandomNumberGenerator.o Output.o Scheduler.o
-	$(CMD) Main.o minheap.o Process.o RandomNumberGenerator.o Output.o Scheduler.o -o app.bin
+	$(CMD) Main.o MinHeap.o Process.o RandomNumberGenerator.o Output.o Scheduler.o -o app.bin
 
 main.o: Main.c
 	$(CMD) -c Main.c
