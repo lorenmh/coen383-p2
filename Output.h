@@ -10,7 +10,9 @@
 #include "Process.h"
 
 typedef struct {
-    int process_id[];
+    char *pid;
+
+    // total number of char in "pid" string, excluding '\0'
     int size;
 } history_t;
 
