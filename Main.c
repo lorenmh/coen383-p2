@@ -54,6 +54,7 @@ int main(int argc, char* argv[]) {
     fcfs(pq, h);
 
     print_process_queue(pq);
+    printf("%s\n", h->pid);
 
     free_process_queue(pq);
 
