@@ -51,7 +51,9 @@ int main(int argc, char* argv[]) {
 
     history_t h = { NULL, 0 };
 
-    sjf(pq, &h);
+    //sjf(pq, &h);
+    rr(pq, &h);
+
 
     print_process_queue(pq);
     printf("%s\n", h.pid);
