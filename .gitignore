@@ -1,5 +1,8 @@
 .DS_Store
 
+.idea/
+cmake-build-debug/
+
 *.sw[op]
 *.o
 *.bin

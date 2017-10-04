@@ -1,7 +1,7 @@
-#include <stdint.h>
+#ifndef MINHEAP_H
+#define MINHEAP_H
 
-#ifndef __MINHEAP_H__
-#define __MINHEAP_H__
+#include <stdint.h>
 
 #define MINHEAP_BUF_SIZE_INIT 8
 #define MINHEAP_BUF_RESIZE_FACTOR 2

@@ -26,7 +26,7 @@ void print_process(process_t const *process) {
 }
 
 void print_process_queue(process_queue_t const *process_queue) {
-	printf("[ ");
+	printf("[\n");
 	for (int i = 0; i < process_queue->size; i++) {
 		printf("\t");
 		print_process(&process_queue->entry[i]);
