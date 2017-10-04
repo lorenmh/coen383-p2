@@ -49,7 +49,7 @@ int main(int argc, char* argv[]) {
 
     print_process_queue(pq);
 
-    history_t *h;
+    history_t *h = malloc(sizeof(history_t));
 
     fcfs(pq, h);
 
