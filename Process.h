@@ -8,9 +8,8 @@
 #define MAX_ACCEPTABLE_ARRIVAL_TIME 99
 #define MAX_SERVICE_TIME 20
 
-
 typedef struct {
-    uint32_t id;
+    char id;
     uint32_t arrival_time;
     uint32_t execution_time;
     uint32_t priority;
