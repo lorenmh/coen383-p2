@@ -16,13 +16,12 @@ int process_comparator(const void* p1, const void* p2) {
 
 void print_process(process_t const *process) {
     printf(
-        "{id: '%c'\tat: %d,\t\tet: %d\t\tp: %d\t\tert: %d\t\tcst: %d}",
+        "{id: '%c'\tat: %d\t\tert: %d\t\ttat: %d\t\trt: %d}",
         process->id,
         process->arrival_time,
-        process->execution_time,
-        process->priority,
         process->expected_run_time,
-        process->context_switch_time
+        process->turnaround_time,
+        process->response_time
     );
 }
 
