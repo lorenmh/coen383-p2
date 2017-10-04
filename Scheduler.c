@@ -52,12 +52,20 @@ void fcfs(process_queue_t *pq, history_t *h) {
 
 
 void sjf(process_queue_t *pq, history_t *h) {
-    uint32_t current_quanta = 0;
     uint32_t process_size = pq->size;
+
     char buff_for_history[MAX_BUFF_SIZE] = {0};
     int history_size = 0;
 
     heap_t *process_heap = create_heap();
+
+    int process_queue_index = 0;
+
+    for (int quantum = 0; quantum < 100; quantum++) {
+        
+
+//        process_t waiting_process = pq->entry[pq_index];
+    }
 }
 
 void srt(process_queue_t *pq, history_t *h) {
