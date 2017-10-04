@@ -38,8 +38,8 @@ void print_process_queue(process_queue_t const *process_queue) {
 process_queue_t *create_process_queue(int size) {
     process_t *newProcessArray = malloc(sizeof(process_t) * size);
     // id and arrival time, other non-random values
-    RandNum_set_parameter(time(NULL), 0, MAX_ACCEPTABLE_ARRIVAL_TIME);
-    for (int i = 0; i < size; ++i) {
+    RandNum_set_parameter((int)time(NULL), 0, MAX_ACCEPTABLE_ARRIVAL_TIME);
+    for (uint32_t i = 0; i < size; ++i) {
         newProcessArray[i].id = i;
         newProcessArray[i].arrival_time = RandNum_get_random();
 
@@ -49,14 +49,14 @@ process_queue_t *create_process_queue(int size) {
     }
 
     // service time
-    RandNum_set_parameter(time(NULL), 1, MAX_SERVICE_TIME);
+    RandNum_set_parameter((int)time(NULL), 1, MAX_SERVICE_TIME);
     for (int i = 0; i < size; ++i) {
         newProcessArray[i].service_time = RandNum_get_random();
         newProcessArray[i].remaining_time = newProcessArray[i].service_time;
     }
 
     // priority
-    RandNum_set_parameter(time(NULL), MIN_PRIORITY, MAX_PRIORITY);
+    RandNum_set_parameter((int)time(NULL), MIN_PRIORITY, MAX_PRIORITY);
     for (int i = 0; i < size; ++i) {
         newProcessArray[i].priority = RandNum_get_random();
     }
@@ -64,7 +64,7 @@ process_queue_t *create_process_queue(int size) {
     qsort(newProcessArray, (size_t)size, sizeof(process_t), process_comparator);
     process_queue_t *new_queue = malloc(sizeof(process_queue_t));
     new_queue->entry = newProcessArray;
-    new_queue->size = size;
+    new_queue->size = (uint32_t)size;
     return new_queue;
 
 }
@@ -78,7 +78,7 @@ process_queue_t *clone_process_queue(process_queue_t *process_queue) {
         return NULL;
     }
     process_queue_t *new = malloc(sizeof(process_queue_t));
-    size_t size = process_queue->size;
+    uint32_t size = process_queue->size;
     new->size = size;
     new->entry = malloc(sizeof(process_t) * size);
     memcpy(new->entry, process_queue->entry, sizeof(process_t) * size);
