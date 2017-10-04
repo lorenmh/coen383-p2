@@ -7,6 +7,7 @@
 #include <stdbool.h>
 
 #define MAX_BUFF_SIZE 2000
+#define PREEMPT_QUANTUM 5
 
 void fcfs(process_queue_t *pq, history_t *h) {
     if (h == NULL) {
@@ -89,7 +90,7 @@ void sjf(process_queue_t *pq, history_t *h) {
 
             int quantum_delta = next_process->arrival_time - quantum;
 
-            // the CPU is idle while waiting until first process arrives
+            // the CPU is idle while waiting until next process arrives
             memset(
                   &history_buf[quantum],
                   '0',
@@ -269,5 +270,88 @@ void hpf_npe(process_queue_t *pq, history_t *h) {
 }
 
 void hpf_pe(process_queue_t *pq, history_t *h) {
+    uint32_t process_size = pq->size;
+
+    char history_buf[MAX_BUFF_SIZE];
+
+    heap_t *priority_heaps[4] = {
+        create_heap(), // priority 1
+        create_heap(), // priority 2
+        create_heap(), // priority 3
+        create_heap()  // priority 4
+    };
+
+    int arriving_process_index = 0;
+    int quantum = 0;
+
+    while (quantum < 100) {
+        // at the beginning of the quantum, check for arrived processes
+        while (arriving_process_index < pq->size) {
+            process_t *arriving_process = &pq->entry[arriving_process_index];
+            if (arriving_process->arrival_time <= quantum) {
+                // if the process is arriving, then insert it into the SJF heap
+                insert(
+                    priority_heaps[arriving_process->priority - 1],
+                    arriving_process->expected_run_time,
+                    arriving_process
+                );
+                arriving_process_index++;
+            } else {
+                break;
+            }
+        }
+
+        //if (is_empty(process_heap)) {
+        //    // the process heap is empty, so let's skip to the quantum where
+        //    // the next process arrives
+
+        //    process_t *next_process = &pq->entry[arriving_process_index];
+
+        //    if (next_process->arrival_time >= 100) break;
+
+        //    int quantum_delta = next_process->arrival_time - quantum;
+
+        //    // the CPU is idle while waiting until next process arrives
+        //    memset(
+        //          &history_buf[quantum],
+        //          '0',
+        //          quantum_delta
+        //    );
+
+        //    quantum += quantum_delta;
+
+        //    continue;
+        //}
+
+        //// If we've gotten this far then the heap is not empty, lets grab the
+        //// next shortest job
+        //process_t *process = (process_t *) extract(process_heap);
+
+        //// update results
+        //process->execution_time = process->expected_run_time;
+        //process->response_time = quantum - process->arrival_time;
+
+        //// update history
+        //memset(
+        //      &history_buf[quantum],
+        //      process->id,
+        //      process->expected_run_time
+        //);
+
+        //// increment quantum because we 'finished the task'
+        //quantum += process->expected_run_time;
+
+        //// update turnaround time
+        //process->turnaround_time = quantum - process->arrival_time;
+    }
+
+    int history_size = quantum + 1;
+
+    h->pid = malloc(sizeof(char) * (history_size + 1));
+
+    memcpy(h->pid, history_buf, sizeof(char) * history_size);
+
+    (h->pid)[history_size] = '\0';
+    h->size = history_size;
 
 }
