@@ -219,17 +219,49 @@ void rr(process_queue_t *pq, history_t *h) {
     if (h == NULL) {
             return;
     }
+
+    int time, time_slice = 1, remaining_processes, flag = 0;
     uint32_t process_size = pq->size;               //process queue size
-    heap_t *process_heap = create_heap();           //process heap
-    process_t *current_process = &pq->entry[0];     //Current process
+    remaining_processes = process_size;
+    
     char history_buf[MAX_BUFF_SIZE];                //history buffer
     int history_size = 0;                           //History buffer size
 
-    int time_slice, remaining_processes, flag = 0;
+    //Idle time before the CPU gets the first process
+    for (int idle_time = 0; idle_time < (pq->entry)[0].arrival_time; ++idle_time) {
+        buff_for_history[history_size] = '0';
+        history_size += 1;
+    }
 
-    remaining_processes = process_size;             //Remaining processes in queue
+    for(int process_queue_index = 0, time = 0; remaining_processes != 0;){
 
+        process_t *current_process = &((pq->entry)[process_queue_index]);     //Current process
+        process_t *next_process = &((pq->entry)[process_queue_index + 1]);
 
+        current_process->remaining_run_time = current_process->expected_run_time;
+
+        if(current_process->remaining_run_time == time_slice){                                        // If the remaining time for the process reaches one, then 
+            buff_for_history[history_size] = current_process->id;       // it means it is completed and we can set the flag to 1
+            history_size += 1;  
+            time += current_process->remaining_run_time;
+            current_process->remaining_run_time = 0;                                         // and you place it in the buffer
+            flag = 1;                                      
+        }    
+        else if(current_process->remaining_run_time > 0){
+            current_process->remaining_run_time -= 1;
+            time += time_slice;
+        }           
+        if(current_process->remaining_run_time == 0 && flag == 1){
+            remaining_processes--;
+            flag = 0;
+        }
+        if(process_queue_index == process_size - 1)
+            process_queue_index = 0;
+        else if(next_process->arrival_time <= time)
+            process_queue_index++;
+        else
+            process_queue_index = 0;
+    }
 }
 
 void hpf_npe(process_queue_t *pq, history_t *h) {
