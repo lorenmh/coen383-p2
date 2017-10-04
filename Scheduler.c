@@ -225,7 +225,7 @@ void rr(process_queue_t *pq, history_t *h) {
     uint32_t process_size = pq->size;               //process queue size
     remaining_processes = process_size;
     
-    char history_buf[MAX_BUFF_SIZE];                //history buffer
+    char buff_for_history[MAX_BUFF_SIZE];                //history buffer
     int history_size = 0;                           //History buffer size
 
     //Idle time before the CPU gets the first process
@@ -263,6 +263,11 @@ void rr(process_queue_t *pq, history_t *h) {
         else
             process_queue_index = 0;
     }
+
+    h->pid = malloc(sizeof(char) * (history_size + 1));
+    memcpy(h->pid, buff_for_history, sizeof(char) * history_size);
+    (h->pid)[history_size] = '\0';
+    h->size = history_size;
 }
 
 void hpf_npe(process_queue_t *pq, history_t *h) {
