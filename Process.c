@@ -45,7 +45,7 @@ process_queue_t *create_process_queue(int size) {
 
         newProcessArray[i].context_switch_time = 0;
         newProcessArray[i].execution_time = 0;
-        newProcessArray[i].turnaround_time = 0;
+        newProcessArray[i].turnaround_time = INT32_MAX;
         newProcessArray[i].response_time = INT32_MAX;
     }
 
