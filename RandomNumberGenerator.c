@@ -14,5 +14,5 @@ void RandNum_set_parameter(int new_seed, int start_value, int end_value) {
 
 
 uint32_t RandNum_get_random(void) {
-    return (rand() % (RandNum_end + 1)) + RandNum_start;
+    return (rand() % (RandNum_end - RandNum_start + 1)) + RandNum_start;
 }
