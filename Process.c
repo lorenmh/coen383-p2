@@ -41,7 +41,7 @@ process_queue_t *create_process_queue(int size) {
     // id and arrival time, other non-random values
     RandNum_set_parameter((int)time(NULL), 0, MAX_ACCEPTABLE_ARRIVAL_TIME);
     for (uint32_t i = 0; i < size; ++i) {
-        newProcessArray[i].id = PIDS[i]; // will error if size > 50
+        newProcessArray[i].id = PIDS[i]; // will error if size > 52
         newProcessArray[i].arrival_time = RandNum_get_random();
 
         newProcessArray[i].context_switch_time = 0;
