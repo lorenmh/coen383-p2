@@ -5,6 +5,7 @@
 #include <time.h>
 #include <string.h>
 
+char const *PIDS = "ABCDEFGHJKLMNOPQRSTUVWXYZabcdefghjklmnopqrstuvwxyz";
 
 int process_comparator(const void* p1, const void* p2) {
     int64_t p1_arrival = (int64_t)(((process_t*)p1)->arrival_time);
@@ -15,7 +16,7 @@ int process_comparator(const void* p1, const void* p2) {
 
 void print_process(process_t const *process) {
     printf(
-        "{id: %d\t\tat: %d,\t\tet: %d\t\tp: %d\t\tert: %d\t\tcst: %d}",
+        "{id: '%c'\tat: %d,\t\tet: %d\t\tp: %d\t\tert: %d\t\tcst: %d}",
         process->id,
         process->arrival_time,
         process->execution_time,
@@ -40,7 +41,7 @@ process_queue_t *create_process_queue(int size) {
     // id and arrival time, other non-random values
     RandNum_set_parameter((int)time(NULL), 0, MAX_ACCEPTABLE_ARRIVAL_TIME);
     for (uint32_t i = 0; i < size; ++i) {
-        newProcessArray[i].id = i;
+        newProcessArray[i].id = PIDS[i]; // will error if size > 50
         newProcessArray[i].arrival_time = RandNum_get_random();
 
         newProcessArray[i].context_switch_time = 0;
