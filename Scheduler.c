@@ -17,17 +17,24 @@ void fcfs(process_queue_t *pq, history_t *h) {
     char buff_for_history[MAX_BUFF_SIZE] = {0};
     int history_size = 0;
     for (int process_queue_index = 0; process_queue_index < process_size; ++process_queue_index) {
+
         process_t *current_process = &((pq->entry)[process_queue_index]);
         if (current_quanta < current_process->arrival_time) {
             uint32_t end_of_idle = current_process->arrival_time;
             for (uint32_t i = current_quanta; i < end_of_idle; ++i) {
+                if (current_quanta > 100) {
+                    break;
+                }
                 buff_for_history[history_size] = '0';
                 // 0 for idle
                 history_size += 1;
+                current_quanta += 1;
             }
-            current_quanta = end_of_idle;
-        }
 
+        }
+        if (current_quanta > 100) {
+            break;
+        }
         current_process->response_time = current_quanta - current_process->arrival_time;
         current_process->turnaround_time = current_process->response_time + current_process->expected_run_time;
 
