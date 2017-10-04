@@ -25,7 +25,7 @@ void fcfs(process_queue_t *pq, history_t *h) {
 
 
         current_process->response_time = current_process->arrival_time - current_quanta;
-        current_process->turnaround_time = current_process->response_time + current_process->execution_time;
+        current_process->turnaround_time = current_process->response_time + current_process->expected_run_time;
 
         uint32_t end_of_exec = current_quanta + current_process->expected_run_time;
         for (uint32_t j = current_quanta; j < end_of_exec; ++j) {
@@ -38,8 +38,8 @@ void fcfs(process_queue_t *pq, history_t *h) {
     memcpy(h->pid, buff_for_history, sizeof(char) * history_size);
     (h->pid)[history_size] = '\0';
     h->size = history_size;
-
 }
+
 
 void sjf(process_queue_t *pq, history_t *h) {
 
