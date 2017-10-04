@@ -33,7 +33,7 @@ heap_t *create_heap(void);
  * @param key a key which will be used to compare against
  * @param value the value which will returned when extract is called
  */
-void insert(heap_t* heap, uint32_t key, void* value);
+void insert(heap_t *heap, uint32_t key, void *value);
 
 
 /**
@@ -42,7 +42,7 @@ void insert(heap_t* heap, uint32_t key, void* value);
  * @param heap a pointer to the heap which will have its min node removed
  * @return void pointer of the value
  */
-void *extract(heap_t* heap);
+void *extract(heap_t *heap);
 
 
 /**
@@ -50,7 +50,7 @@ void *extract(heap_t* heap);
  *
  * @param heap a pointer to the heap which will be printed
  */
-void print_heap(heap_t*);
+void print_heap(heap_t *heap);
 
 
 /**
@@ -59,7 +59,7 @@ void print_heap(heap_t*);
  * @param heap a pointer to the heap
  * @return int [0,1]
  */
-int is_empty(heap_t*);
+int is_empty(heap_t *heap);
 
 
 /**
@@ -67,6 +67,6 @@ int is_empty(heap_t*);
  *
  * @param heap a pointer to the heap which will be freed
  */
-void free_heap(heap_t*);
+void free_heap(heap_t *heap);
 
 #endif
