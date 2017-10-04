@@ -1,5 +1,12 @@
 #include "RandomNumberGenerator.h"
+
+#ifdef LINUX
+#include <bsd/stdlib.h>
+#endif
+
+#ifndef LINUX
 #include <stdlib.h>
+#endif
 
 uint32_t RandNum_seed = 0;
 uint32_t RandNum_start = 0;
