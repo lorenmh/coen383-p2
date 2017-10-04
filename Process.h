@@ -12,10 +12,10 @@
 typedef struct {
     uint32_t id;
     uint32_t arrival_time;
-    uint32_t service_time;
+    uint32_t execution_time;
     uint32_t priority;
 
-    uint32_t remaining_time;  // for shortest remaining time first
+    uint32_t expected_run_time;  // for shortest remaining time first
     uint32_t context_switch_time;  // for aging
 
 
