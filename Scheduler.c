@@ -173,6 +173,19 @@ void srt(process_queue_t *pq, history_t *h) {
 }
 
 void rr(process_queue_t *pq, history_t *h) {
+    if (h == NULL) {
+            return;
+    }
+    uint32_t process_size = pq->size;               //process queue size
+    heap_t *process_heap = create_heap();           //process heap
+    process_t *current_process = &pq->entry[0];     //Current process
+    char history_buf[MAX_BUFF_SIZE];                //history buffer
+    int history_size = 0;                           //History buffer size
+
+    int time_slice, remaining_processes, flag = 0;
+
+    remaining_processes = process_size;             //Remaining processes in queue
+
 
 }
 
