@@ -5,9 +5,6 @@ CMD=$(CC) $(CFLAGS)
 all: Main.o MinHeap.o Process.o RandomNumberGenerator.o Output.o Scheduler.o
 	$(CMD) Main.o MinHeap.o Process.o RandomNumberGenerator.o Output.o Scheduler.o -o app.bin
 
-main.o: Main.c
-	$(CMD) -c Main.c
-
 Process.o: Process.c
 	$(CMD) -c Process.c
 
@@ -20,8 +17,8 @@ Scheduler.o: Scheduler.c
 RandomNumberGenerator.o: RandomNumberGenerator.c
 	$(CMD) -c RandomNumberGenerator.c
 
-main.o: main.c
-	$(CMD) -c main.c
+Main.o: Main.c
+	$(CMD) -c Main.c
 
 Minheap.o: MinHeap.c
 	$(CMD) -c MinHeap.c
