@@ -23,5 +23,5 @@ RandomNumberGenerator.o: RandomNumberGenerator.c
 main.o: main.c
 	$(CMD) -c main.c
 
-minheap.o: MinHeap.c
+Minheap.o: MinHeap.c
 	$(CMD) -c MinHeap.c
