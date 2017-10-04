@@ -20,18 +20,13 @@ void fcfs(process_queue_t *pq, history_t *h) {
         if (current_quanta < current_process->arrival_time) {
             uint32_t end_of_idle = current_process->arrival_time;
             for (uint32_t i = current_quanta; i < end_of_idle; ++i) {
-                if (current_quanta >= 100) {
-                    break;
-                }
                 buff_for_history[history_size] = '0';
                 // 0 for idle
                 history_size += 1;
             }
             current_quanta = end_of_idle;
         }
-        if (current_quanta >= 100) {
-            break;
-        }
+
         current_process->response_time = current_quanta - current_process->arrival_time;
         current_process->turnaround_time = current_process->response_time + current_process->expected_run_time;
 
@@ -53,18 +48,39 @@ void fcfs(process_queue_t *pq, history_t *h) {
 
 void sjf(process_queue_t *pq, history_t *h) {
     uint32_t process_size = pq->size;
-
-    char buff_for_history[MAX_BUFF_SIZE] = {0};
+    char history_buf[MAX_BUFF_SIZE];
     int history_size = 0;
 
     heap_t *process_heap = create_heap();
+    process_t *current_process = &pq->entry[0];
 
-    int process_queue_index = 0;
+    int start_quantum = current_process->arrival_time;
 
-    for (int quantum = 0; quantum < 100; quantum++) {
-        
+    // the CPU is idle while waiting until first process arrives
+    memset(history_buf, '0', start_quantum);
 
-//        process_t waiting_process = pq->entry[pq_index];
+    int arriving_process_index = 1;
+
+    for (int quantum = start_quantum ;; quantum++) {
+      // at the beginning of the quantum, check for arrived processes
+      while (1) {
+        process_t *arriving_process = &pq->entry[arriving_process_index];
+        if (arriving_process->arrival_time <= quantum) {
+          // if the process is arriving, then insert it into the SJF heap
+          insert(
+              process_heap,
+              arriving_process->expected_run_time,
+              arriving_process
+          );
+          arriving_process_index++;
+        } else {
+          break;
+        }
+      }
+
+      //quantum += current_process->
+      if (current_process == NULL) continue;
+
     }
 }
 
