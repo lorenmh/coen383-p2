@@ -49,12 +49,12 @@ int main(int argc, char* argv[]) {
 
     print_process_queue(pq);
 
-    history_t *h = malloc(sizeof(history_t));
+    history_t h = { NULL, 0 };
 
-    fcfs(pq, h);
+    fcfs(pq, &h);
 
     print_process_queue(pq);
-    printf("%s\n", h->pid);
+    printf("%s\n", h.pid);
 
     free_process_queue(pq);
 
