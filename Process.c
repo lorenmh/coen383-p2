@@ -5,6 +5,8 @@
 #include <time.h>
 #include <string.h>
 
+#define INIT_SEED ((uint32_t)time(NULL))
+
 char const *PIDS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
 int process_comparator(const void* p1, const void* p2) {
@@ -37,8 +39,14 @@ void print_process_queue(process_queue_t const *process_queue) {
 
 process_queue_t *create_process_queue(int size) {
     process_t *newProcessArray = malloc(sizeof(process_t) * size);
+
+    srand(INIT_SEED);
+    int seed_for_arrival = rand();
+    int seed_for_run_time = rand();
+    int seed_for_priority = rand();
+
     // id and arrival time, other non-random values
-    RandNum_set_parameter((int)time(NULL), 0, MAX_ACCEPTABLE_ARRIVAL_TIME);
+    RandNum_set_parameter(seed_for_arrival, 0, MAX_ACCEPTABLE_ARRIVAL_TIME);
     for (uint32_t i = 0; i < size; ++i) {
         newProcessArray[i].id = PIDS[i]; // will error if size > 52
         newProcessArray[i].arrival_time = RandNum_get_random();
@@ -50,13 +58,13 @@ process_queue_t *create_process_queue(int size) {
     }
 
     // expected run time
-    RandNum_set_parameter((int)time(NULL), 1, MAX_SERVICE_TIME);
+    RandNum_set_parameter(seed_for_run_time, 1, MAX_SERVICE_TIME);
     for (int i = 0; i < size; ++i) {
         newProcessArray[i].expected_run_time = RandNum_get_random();
     }
 
     // priority
-    RandNum_set_parameter((int)time(NULL), MIN_PRIORITY, MAX_PRIORITY);
+    RandNum_set_parameter(seed_for_priority, MIN_PRIORITY, MAX_PRIORITY);
     for (int i = 0; i < size; ++i) {
         newProcessArray[i].priority = RandNum_get_random();
     }
