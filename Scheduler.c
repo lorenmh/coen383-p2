@@ -7,6 +7,9 @@
 #define MAX_BUFF_SIZE 2000
 
 void fcfs(process_queue_t *pq, history_t *h) {
+    if (h == NULL) {
+        return;
+    }
     uint32_t current_quanta = 0;
     uint32_t process_size = pq->size;
     char buff_for_history[MAX_BUFF_SIZE] = {0};
@@ -33,6 +36,7 @@ void fcfs(process_queue_t *pq, history_t *h) {
             buff_for_history[history_size] = current_process->id;
             history_size += 1;
         }
+        current_quanta = end_of_exec;
     }
     h->pid = malloc(sizeof(char) * (history_size + 1));
     memcpy(h->pid, buff_for_history, sizeof(char) * history_size);
