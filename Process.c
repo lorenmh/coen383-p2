@@ -5,7 +5,7 @@
 #include <time.h>
 #include <string.h>
 
-char const *PIDS = "ABCDEFGHJKLMNOPQRSTUVWXYZabcdefghjklmnopqrstuvwxyz";
+char const *PIDS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
 int process_comparator(const void* p1, const void* p2) {
     int64_t p1_arrival = (int64_t)(((process_t*)p1)->arrival_time);
