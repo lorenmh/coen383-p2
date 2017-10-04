@@ -26,7 +26,7 @@ void fcfs(process_queue_t *pq, history_t *h) {
             current_quanta = end_of_idle;
         }
 
-        current_process->response_time = current_process->arrival_time - current_quanta;
+        current_process->response_time = current_quanta - current_process->arrival_time;
         current_process->turnaround_time = current_process->response_time + current_process->expected_run_time;
 
         uint32_t end_of_exec = current_quanta + current_process->expected_run_time;
