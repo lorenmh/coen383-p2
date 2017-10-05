@@ -24,7 +24,7 @@ void print_process(process_t const *process) {
         process->turnaround_time,
         process->response_time,
         process->remaining_run_time,
-        process->flag;
+        process->flag
     );
 }
 
