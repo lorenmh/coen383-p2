@@ -354,7 +354,7 @@ void hpf_npe(process_queue_t *pq, history_t *h) {
             }
             process_t *new_process = &((pq->entry)[process_index]);
             int32_t priority = new_process->priority - 1;
-            insert(process_pools[priority], new_process->context_switch_time, (void*)new_process);
+            insert(process_pools[priority], new_process->arrival_time, (void*)new_process);
             process_pools_bitmap |= (1 << priority);
             process_index += 1;
         }
@@ -389,10 +389,25 @@ void hpf_npe(process_queue_t *pq, history_t *h) {
         }
         current_process->response_time = current_quanta - current_process->arrival_time;
 
-        
+        uint32_t end_of_exec = current_quanta + current_process->expected_run_time;
+        current_process->turnaround_time = end_of_exec - current_process->arrival_time;
+        for (int i = current_quanta; i < end_of_exec; ++i) {
+            buff_for_history[history_size] = current_process->id;
+            history_size += 1;
+        }
+        current_process->remaining_run_time = 0;
+        current_process->context_switch_time = end_of_exec;
+        current_process->flag = 1;
+
+        current_quanta = end_of_exec;
+
 
     }
 
+    h->pid = malloc(sizeof(char) * (history_size + 1));
+    memcpy(h->pid, buff_for_history, sizeof(char) * history_size);
+    (h->pid)[history_size] = '\0';
+    h->size = history_size;
 
     // clean up
     for (int i = 0; i < MAX_PRIORITY; ++i) {
