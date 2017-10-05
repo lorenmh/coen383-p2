@@ -16,6 +16,7 @@ typedef struct {
     uint32_t expected_run_time;
     uint32_t remaining_run_time;
     uint32_t priority;
+    uint32_t flag;
 
     uint32_t execution_time;  // for shortest remaining time first 
     uint32_t context_switch_time;  // for aging
