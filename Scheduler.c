@@ -221,7 +221,7 @@ void rr(process_queue_t *pq, history_t *h) {
             return;
     }
 
-    int time, time_slice = 1, remaining_processes, flag = 0;
+    int time = 0, time_slice = 1, remaining_processes, flag = 0;
     uint32_t process_size = pq->size;               //process queue size
     remaining_processes = process_size;
     
@@ -235,8 +235,6 @@ void rr(process_queue_t *pq, history_t *h) {
     }
 
     int process_queue_index = 0;
-    int time = 0;
-
 
     process_t *current_process = &((pq->entry)[process_queue_index]);    
     current_process->remaining_run_time = current_process->expected_run_time;
