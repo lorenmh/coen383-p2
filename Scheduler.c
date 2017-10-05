@@ -247,6 +247,7 @@ void rr(process_queue_t *pq, history_t *h) {
         history_size += 1;
 
         remaining_processes--;
+        process_queue_index++;
             
     }
 
