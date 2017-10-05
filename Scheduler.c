@@ -265,14 +265,13 @@ void rr(process_queue_t *pq, history_t *h) {
 
 
         if(current_process->remaining_run_time == 0 && current_process->flag != 1){
-            buff_for_history[history_size] = current_process->id;       
-            history_size += 1;
             current_process->flag = 1;
             remaining_processes--;
         }
         if(current_process->flag != 1 && current_process->remaining_run_time != 0){
+            buff_for_history[history_size] = current_process->id;       
+            history_size += 1;
             current_process->remaining_run_time--;
-;
         }
 
         if(process_queue_index == process_size - 1)
