@@ -268,7 +268,7 @@ void rr(process_queue_t *pq, history_t *h) {
         }
         if(current_process->completed_flag != 1 && current_process->remaining_run_time != 0){
             if(current_process->arrival_flag == 0){
-                current_process->response_time = current_quanta;
+                current_process->response_time = current_quanta - current_process->arrival_time;
                 current_process->arrival_flag = 1;
                 current_quanta++;
             }
@@ -284,41 +284,6 @@ void rr(process_queue_t *pq, history_t *h) {
             
     }
 
-/*
-    for(int process_queue_index = 0, time = 0; remaining_processes != 0;){
-
-        process_t *current_process = &((pq->entry)[process_queue_index]);     
-        process_t *next_process = &((pq->entry)[process_queue_index + 1]);
-
-        current_process->remaining_run_time = current_process->expected_run_time;
-
-
-        
-        if((current_process->remaining_run_time <= time_slice) &&(current_process->remaining_run_time > 0)){
-            buff_for_history[history_size] = current_process->id;      
-            history_size += 1;
-            time += current_process->remaining_run_time;
-            current_process->remaining_run_time = 0;                                       
-            flag = 1;                                      
-        }    
-        else if(current_process->remaining_run_time > 0){
-            current_process->remaining_run_time -= 1;
-            time += time_slice;
-        }           
-        if(current_process->remaining_run_time == 0 && flag == 1){
-            
-            remaining_processes--;
-            flag = 0;
-        }
-        if(process_queue_index == process_size - 1)
-            process_queue_index = 0;
-        else if(next_process->arrival_time <= time)
-            process_queue_index++;
-        else
-            process_queue_index = 0;
-            
-    }
-*/
     h->pid = malloc(sizeof(char) * (history_size + 1));
     memcpy(h->pid, buff_for_history, sizeof(char) * history_size);
     (h->pid)[history_size] = '\0';
