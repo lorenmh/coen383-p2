@@ -5,7 +5,6 @@
 #include <time.h>
 #include <string.h>
 
-#define INIT_SEED ((uint32_t)time(NULL))
 
 char const *PIDS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
