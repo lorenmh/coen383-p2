@@ -272,20 +272,19 @@ void rr(process_queue_t *pq, history_t *h) {
             if(current_process->arrival_flag == 0){
                 if(process_queue_index == 0){
                     current_process->response_time = count;
-                    current_process->turnaround_time = 0;
                     count++;
                 }
                 else{
                     current_process->response_time = count++;
-                    current_process->turnaround_time++;
-
                 }
-
+                current_process->turnaround_time = 0;
                 current_process->arrival_flag = 1;
             }
             buff_for_history[history_size] = current_process->id;       
             history_size += 1;
             current_process->remaining_run_time--;
+            current_process->turnaround_time++;
+
             
 
         }
