@@ -268,9 +268,14 @@ void rr(process_queue_t *pq, history_t *h) {
         }
         if(current_process->completed_flag != 1 && current_process->remaining_run_time != 0){
             if(current_process->arrival_flag == 0){
-                current_process->response_time = current_quanta - current_process->arrival_time;
+                if(process_queue_index == 0){
+                    current_process->response_time = current_quanta - current_process->arrival_time;
+                }
+                else{
+                    current_process->response_time++;
+                }
+
                 current_process->arrival_flag = 1;
-                current_quanta++;
             }
             buff_for_history[history_size] = current_process->id;       
             history_size += 1;
