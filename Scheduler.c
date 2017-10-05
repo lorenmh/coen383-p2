@@ -247,6 +247,7 @@ void rr(process_queue_t *pq, history_t *h) {
             printf("%d\n", process_queue_index);  
             time += current_process->remaining_run_time;
             current_process->remaining_run_time = 0;                                         // and you place it in the buffer
+            printf("%d\n", current_process_remaining_time);
             flag = 1;                                      
         }    
         else if(current_process->remaining_run_time > 0){
