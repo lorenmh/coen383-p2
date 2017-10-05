@@ -234,11 +234,12 @@ void rr(process_queue_t *pq, history_t *h) {
         history_size += 1;
     }
 
-    int process_queue_index = 0, time = 0;
+    int process_queue_index = 0;
+    int time = 0;
 
 
-        process_t *current_process = &((pq->entry)[process_queue_index]);    
-        current_process->remaining_run_time = current_process->expected_run_time;
+    process_t *current_process = &((pq->entry)[process_queue_index]);    
+    current_process->remaining_run_time = current_process->expected_run_time;
     
     while(remaining_processes != 0){
         process_t *current_process = &((pq->entry)[process_queue_index]);
