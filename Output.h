@@ -17,8 +17,11 @@ typedef struct {
 } history_t;
 
 typedef struct {
-    uint32_t avg_response_time;
-    uint32_t avg_turnaround_time;
+    double avg_response_time;
+    double avg_turnaround_time;
+    double avg_waiting_time;
+
+    double throughput; 
 
 } result_t;
 
