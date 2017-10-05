@@ -241,7 +241,7 @@ void rr(process_queue_t *pq, history_t *h) {
 
         current_process->remaining_run_time = current_process->expected_run_time;
 
-        if(current_process->remaining_run_time == time_slice){                                        // If the remaining time for the process reaches one, then 
+        if((current_process->remaining_run_time <= time_slice) &&(current_process->remaining_run_time > 0)){                                        // If the remaining time for the process reaches one, then 
             buff_for_history[history_size] = current_process->id;       // it means it is completed and we can set the flag to 1
             history_size += 1;  
             time += current_process->remaining_run_time;
