@@ -256,12 +256,12 @@ void rr(process_queue_t *pq, history_t *h) {
 
 
     int process_queue_index = 0, count = 0;
-    current_quanta++;
+    //current_quanta++;
 
 
     while(remaining_processes != 0){
         process_t *current_process = &((pq->entry)[process_queue_index]);
-        current_quanta++;
+        
 
 
         if(current_process->remaining_run_time == 0 && current_process->completed_flag != 1){
@@ -283,10 +283,8 @@ void rr(process_queue_t *pq, history_t *h) {
             buff_for_history[history_size] = current_process->id;       
             history_size += 1;
             current_process->remaining_run_time--;
-            current_process->turnaround_time++;
-
-            
-
+            current_process->turnaround_time+= current_quanta;
+            current_quanta++;
         }
 
         if(process_queue_index == process_size - 1)
