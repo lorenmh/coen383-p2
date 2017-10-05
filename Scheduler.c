@@ -252,11 +252,12 @@ void rr(process_queue_t *pq, history_t *h) {
     for (int idle_time = 0; idle_time < (pq->entry)[0].arrival_time; ++idle_time) {
         buff_for_history[history_size] = '0';
         history_size += 1;
-        //current_quanta++;
     }
 
 
     int process_queue_index = 0, count = 0;
+    current_quanta++;
+
 
     while(remaining_processes != 0){
         process_t *current_process = &((pq->entry)[process_queue_index]);
