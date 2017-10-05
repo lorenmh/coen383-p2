@@ -245,6 +245,7 @@ void rr(process_queue_t *pq, history_t *h) {
             buff_for_history[history_size] = current_process->id;       // it means it is completed and we can set the flag to 1
             history_size += 1;
             time += current_process->remaining_run_time;
+            printf("%d\n",current_process->remaining_run_time );
             current_process->remaining_run_time = 0;                                         // and you place it in the buffer
             flag = 1;                                      
         }    
