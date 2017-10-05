@@ -252,7 +252,7 @@ void rr(process_queue_t *pq, history_t *h) {
     for (int idle_time = 0; idle_time < (pq->entry)[0].arrival_time; ++idle_time) {
         buff_for_history[history_size] = '0';
         history_size += 1;
-        current_quanta++;
+        //current_quanta++;
     }
 
 
@@ -277,11 +277,13 @@ void rr(process_queue_t *pq, history_t *h) {
                 }
 
                 current_process->arrival_flag = 1;
-                current_quanta++;
             }
             buff_for_history[history_size] = current_process->id;       
             history_size += 1;
             current_process->remaining_run_time--;
+            current_process->turnaround_time = current_quanta - current_process->expected_run_time;
+            current_quanta++;
+
         }
 
         if(process_queue_index == process_size - 1)
