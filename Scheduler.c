@@ -256,7 +256,7 @@ void rr(process_queue_t *pq, history_t *h) {
 
 
     int process_queue_index = 0, count = 0;
-    //current_quanta++;
+    current_quanta++;
 
 
     while(remaining_processes != 0){
