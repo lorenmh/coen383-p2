@@ -234,7 +234,7 @@ void rr(process_queue_t *pq, history_t *h) {
         history_size += 1;
     }
 
-/*
+
     int process_queue_index = 0;
 
     process_t *current_process = &((pq->entry)[process_queue_index]);    
@@ -251,8 +251,8 @@ void rr(process_queue_t *pq, history_t *h) {
         process_queue_index++;
             
     }
-*/
 
+/*
     for(int process_queue_index = 0, time = 0; remaining_processes != 0;){
 
         process_t *current_process = &((pq->entry)[process_queue_index]);     
@@ -263,7 +263,8 @@ void rr(process_queue_t *pq, history_t *h) {
 
         
         if((current_process->remaining_run_time <= time_slice) &&(current_process->remaining_run_time > 0)){
-            
+            buff_for_history[history_size] = current_process->id;      
+            history_size += 1;
             time += current_process->remaining_run_time;
             current_process->remaining_run_time = 0;                                       
             flag = 1;                                      
@@ -273,8 +274,7 @@ void rr(process_queue_t *pq, history_t *h) {
             time += time_slice;
         }           
         if(current_process->remaining_run_time == 0 && flag == 1){
-            buff_for_history[history_size] = current_process->id;      
-            history_size += 1;
+            
             remaining_processes--;
             flag = 0;
         }
@@ -286,7 +286,7 @@ void rr(process_queue_t *pq, history_t *h) {
             process_queue_index = 0;
             
     }
-
+*/
     h->pid = malloc(sizeof(char) * (history_size + 1));
     memcpy(h->pid, buff_for_history, sizeof(char) * history_size);
     (h->pid)[history_size] = '\0';
