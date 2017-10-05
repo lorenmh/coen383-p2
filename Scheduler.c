@@ -266,7 +266,7 @@ void rr(process_queue_t *pq, history_t *h) {
 
         if(current_process->remaining_run_time == 0 && current_process->flag != 1){
             buff_for_history[history_size] = current_process->id;       
-            history_size += 1
+            history_size += 1;
             current_process->flag = 1;
             remaining_processes--;
         }
