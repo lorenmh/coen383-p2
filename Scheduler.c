@@ -256,7 +256,7 @@ void rr(process_queue_t *pq, history_t *h) {
     }
 
 
-    int process_queue_index = 0;
+    int process_queue_index = 0, count = 0;
 
     while(remaining_processes != 0){
         process_t *current_process = &((pq->entry)[process_queue_index]);
@@ -269,10 +269,10 @@ void rr(process_queue_t *pq, history_t *h) {
         if(current_process->completed_flag != 1 && current_process->remaining_run_time != 0){
             if(current_process->arrival_flag == 0){
                 if(process_queue_index == 0){
-                    current_process->response_time = current_quanta - current_process->arrival_time;
+                    current_process->response_time = count;
                 }
                 else{
-                    current_process->response_time = current_quanta;
+                    current_process->response_time = count++;
                 }
 
                 current_process->arrival_flag = 1;
