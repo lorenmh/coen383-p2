@@ -62,6 +62,7 @@ process_queue_t *create_process_queue(int size) {
     RandNum_set_parameter(seed_for_run_time, 1, MAX_SERVICE_TIME);
     for (int i = 0; i < size; ++i) {
         newProcessArray[i].expected_run_time = RandNum_get_random();
+        newProcessArray[i].remaining_run_time = newProcessArray[i].expected_run_time;
     }
 
     // priority
