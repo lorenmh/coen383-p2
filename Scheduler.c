@@ -270,6 +270,7 @@ void rr(process_queue_t *pq, history_t *h) {
             if(current_process->arrival_flag == 0){
                 if(process_queue_index == 0){
                     current_process->response_time = count;
+                    count++;
                 }
                 else{
                     current_process->response_time = count++;
