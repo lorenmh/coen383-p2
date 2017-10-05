@@ -281,8 +281,9 @@ void rr(process_queue_t *pq, history_t *h) {
             buff_for_history[history_size] = current_process->id;       
             history_size += 1;
             current_process->remaining_run_time--;
-            current_process->turnaround_time = current_quanta - current_process->expected_run_time;
             current_quanta++;
+            current_process->turnaround_time = current_quanta - current_process->expected_run_time;
+            
 
         }
 
