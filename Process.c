@@ -24,7 +24,8 @@ void print_process(process_t const *process) {
         process->expected_run_time,
         process->turnaround_time,
         process->response_time,
-        process->remaining_run_time
+        process->remaining_run_time,
+        process->flag;
     );
 }
 
@@ -55,6 +56,7 @@ process_queue_t *create_process_queue(int size) {
         newProcessArray[i].context_switch_time = 0;
         newProcessArray[i].execution_time = 0;
         newProcessArray[i].remaining_run_time = 0;
+        newProcessArray[i].flag = 0;
         newProcessArray[i].turnaround_time = INT32_MAX;
         newProcessArray[i].response_time = INT32_MAX;
     }
