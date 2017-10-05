@@ -242,7 +242,7 @@ void rr(process_queue_t *pq, history_t *h) {
     
     while(remaining_processes != 0){
         process_t *current_process = &((pq->entry)[process_queue_index]);
-        current_process->remaining_run_time = current_process->expected_run_time;
+        printf("%d\n", current_process->remaining_run_time);
 
         buff_for_history[history_size] = current_process->id;       
         history_size += 1;
