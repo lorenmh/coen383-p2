@@ -252,7 +252,7 @@ void rr(process_queue_t *pq, history_t *h) {
     for (int idle_time = 0; idle_time < (pq->entry)[0].arrival_time; ++idle_time) {
         buff_for_history[history_size] = '0';
         history_size += 1;
-        current_quanta++;
+        //current_quanta++;
     }
 
 
