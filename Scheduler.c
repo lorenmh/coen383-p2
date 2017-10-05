@@ -152,17 +152,35 @@ void srt(process_queue_t *pq, history_t *h) {
 
 
     while (true) {
-        if (current_quanta > 100) {
+        if (current_quanta > 100 && is_empty(process_pool)) {
             break;
         }
         while (process_index < pq->size && (pq->entry)[process_index].arrival_time <= current_quanta) {
+            if (current_quanta > 99) {
+                break;
+            }
             process_t *new_process = &((pq->entry)[process_index]);
             insert(process_pool, new_process->expected_run_time, (void*)new_process);
             process_index += 1;
         }
-        process_t *current_process = extract(process_pool);
+        process_t *current_process = NULL;
+
+        while (!is_empty(process_pool)) {
+            current_process = extract(process_pool);
+            if (current_quanta > 99 && current_process->response_time == INT32_MAX) {
+                // this process has not get its first cpu before quanta 100
+                // just ignore it
+                current_process = NULL;
+                continue;
+            }else {
+                break;
+            }
+        }
         if (current_process == NULL) {
-            uint32_t end_of_idle = 100;
+            if (current_quanta > 99) {
+                continue;
+            }
+            uint32_t end_of_idle = 99;
             if (process_index < pq->size) {
                 end_of_idle = (pq->entry)[process_index].arrival_time;
             }
@@ -173,7 +191,6 @@ void srt(process_queue_t *pq, history_t *h) {
             current_quanta = end_of_idle;
             continue;
         }
-
         if (current_process->response_time == INT32_MAX) {
             current_process->response_time = current_quanta - current_process->arrival_time;
         }
@@ -214,6 +231,9 @@ void srt(process_queue_t *pq, history_t *h) {
     memcpy(h->pid, buff_for_history, sizeof(char) * history_size);
     (h->pid)[history_size] = '\0';
     h->size = history_size;
+
+    free_heap(process_pool);
+
 }
 
 void rr(process_queue_t *pq, history_t *h) {
