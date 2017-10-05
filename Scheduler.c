@@ -265,7 +265,6 @@ void rr(process_queue_t *pq, history_t *h) {
         if(current_process->remaining_run_time == 0 && current_process->completed_flag != 1){
             current_process->completed_flag = 1;
             remaining_processes--;
-            current_process->turnaround_time = current_quanta - current_process->expected_run_time;
         }
         if(current_process->completed_flag != 1 && current_process->remaining_run_time != 0){
             if(current_process->arrival_flag == 0){
@@ -282,6 +281,7 @@ void rr(process_queue_t *pq, history_t *h) {
             buff_for_history[history_size] = current_process->id;       
             history_size += 1;
             current_process->remaining_run_time--;
+            current_process->turnaround_time = current_quanta - current_process->expected_run_time;
             current_quanta++;
         }
 
