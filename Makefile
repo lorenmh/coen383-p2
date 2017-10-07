@@ -9,6 +9,9 @@ FILES=Main.o MinHeap.o Process.o RandomNumberGenerator.o Output.o Scheduler.o
 all: MinHeap.o Process.o RandomNumberGenerator.o Output.o Scheduler.o Main.o
 	$(CMD) $(FILES) -g -o app.bin
 
+clean:
+	rm *.o app.bin
+
 MinHeap.o: MinHeap.c
 	$(COMPILE) MinHeap.c
 
