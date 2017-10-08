@@ -269,6 +269,8 @@ void rr(process_queue_t *pq, history_t *h) {
         }
 
         if(current_process->remaining_run_time < time_slice && current_process->remaining_run_time > 0){
+            printf("made it far");
+
             time+=current_process->remaining_run_time;
             current_process->remaining_run_time = 0;
             current_process->completed_flag = 1;
