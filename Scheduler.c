@@ -267,6 +267,7 @@ void rr(process_queue_t *pq, history_t *h) {
         if (current_quanta > 100) {
             break;
         }
+            printf("made");
 
         if(current_process->remaining_run_time < time_slice && current_process->remaining_run_time > 0){
             printf("made it far");
