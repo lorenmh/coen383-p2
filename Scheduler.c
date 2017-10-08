@@ -272,7 +272,6 @@ void rr(process_queue_t *pq, history_t *h) {
             time+=current_process->remaining_run_time;
             current_process->remaining_run_time = 0;
             current_process->completed_flag = 1;
-            printf("%d\n", current_process->turnaround_time);
             remaining_processes--;
         }
         else if(current_process->remaining_run_time > 0){
@@ -284,12 +283,13 @@ void rr(process_queue_t *pq, history_t *h) {
             history_size += 1;
             current_process->remaining_run_time-=time_slice;
             time+=time_slice;
-            printf("%d\n",time );
             current_quanta += 1;
         }
         if(current_process->remaining_run_time == 0 && current_process->completed_flag == 1){
             remaining_processes--;
             current_process->turnaround_time+=time - current_process->arrival_time;
+            printf("%d\n", current_process->turnaround_time);
+
             current_process->completed_flag = 0;
         }
         
