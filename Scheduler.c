@@ -268,10 +268,11 @@ void rr(process_queue_t *pq, history_t *h) {
             break;
         }
 
-        if(current_process->remaining_run_time < time_slice && current_process->remaining_run_time > 0){
+        if(current_process->remaining_run_time < time_slice && current_process->remaining_run_time > 0){/
             time+=current_process->remaining_run_time;
             current_process->remaining_run_time = 0;
             current_process->completed_flag = 1;
+            printf("%d\n", current_process->turnaround_time);
             remaining_processes--;
         }
         else if(current_process->remaining_run_time > 0){
