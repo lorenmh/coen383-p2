@@ -287,7 +287,7 @@ void rr(process_queue_t *pq, history_t *h) {
         }
         if(current_process->remaining_run_time == 0 && current_process->completed_flag == 1){
             remaining_processes--;
-            current_process->turnaround_time+=time - current_process->arrival_time;
+            current_process->turnaround_time = (current_process->turnaround_time + time) - current_process->arrival_time;
             printf("%d\n", current_process->turnaround_time);
 
             current_process->completed_flag = 0;
