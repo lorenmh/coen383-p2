@@ -237,6 +237,59 @@ void srt(process_queue_t *pq, history_t *h) {
 }
 
 void rr(process_queue_t *pq, history_t *h) {
+    
+if (h == NULL) {
+        return;
+    }
+
+    int time, count, time_slice = 1, remaining_processes, current_quanta = 0;
+    uint32_t process_size = pq->size;               
+    remaining_processes = process_size;
+    
+    char buff_for_history[MAX_BUFF_SIZE];               
+    int history_size = 0;                          
+
+    for (int idle_time = 0; idle_time < (pq->entry)[0].arrival_time; ++idle_time) {
+        buff_for_history[history_size] = '0';
+        history_size += 1;
+    }
+
+    current_quanta = (pq->entry)[0].arrival_time;
+    int process_queue_index = 0, count = 0;
+
+    for(time = 0, count = 0; remaining_processes != 0){
+        process_t *current_process = &((pq->entry)[count]);
+        process_t *next_process = &((pq->entry)[count+1]);
+
+        if(current_process->remaining_run_time <= time_slice && current_process->remaining_run_time > 0){
+            time+=current_process->remaining_run_time;
+            current_process->remaining_run_time = 0;
+            current_process->completed_flag = 1;
+        }
+        else if(current_process->remaining_run_time > 0){
+            buff_for_history[history_size] = current_process->id;       
+            history_size += 1;
+            current_process->remaining_run_time-=time_slice;
+            time+=time_slice;
+        }
+        if(current_process->remaining_run_time == 0 && current_process->completed_flag == 1){
+            remaining_processes--;
+            current_process->turnaround_time+=time - current_process->arrival_time;
+            current_process->completed_flag = 0;
+        }
+        if(count == process_size - 1)
+            count = 0;
+        else if(next_process->arrival_time <= time)
+            count++;
+        else
+            count = 0;
+    }
+
+     h->pid = malloc(sizeof(char) * (history_size + 1));
+    memcpy(h->pid, buff_for_history, sizeof(char) * history_size);
+    (h->pid)[history_size] = '\0';
+    h->size = history_size;
+    /*
     if (h == NULL) {
             return;
     }
@@ -298,6 +351,7 @@ void rr(process_queue_t *pq, history_t *h) {
     memcpy(h->pid, buff_for_history, sizeof(char) * history_size);
     (h->pid)[history_size] = '\0';
     h->size = history_size;
+    */
 }
 
 void hpf_npe(process_queue_t *pq, history_t *h) {
