@@ -252,6 +252,7 @@ if (h == NULL) {
     for (int idle_time = 0; idle_time < (pq->entry)[0].arrival_time; ++idle_time) {
         buff_for_history[history_size] = '0';
         history_size += 1;
+        current_quanta += 1;
     }
 
     current_quanta = (pq->entry)[0].arrival_time;
@@ -260,8 +261,7 @@ if (h == NULL) {
     for(time = 0, count = 0; remaining_processes != 0;){
         process_t *current_process = &((pq->entry)[count]);
         process_t *next_process = &((pq->entry)[count+1]);
-        current_process->turnaround_time = 0;
-        
+
         if (current_quanta > 100) {
             break;
         }
@@ -275,6 +275,7 @@ if (h == NULL) {
             history_size += 1;
             current_process->remaining_run_time-=time_slice;
             time+=time_slice;
+            current_quanta += 1;
         }
         if(current_process->remaining_run_time == 0 && current_process->completed_flag == 1){
             remaining_processes--;
