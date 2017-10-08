@@ -258,7 +258,7 @@ if (h == NULL) {
     current_quanta = (pq->entry)[0].arrival_time;
     int process_queue_index = 0;
 
-    for(time = 0, count = 0; remaining_processes != 0;){
+    for(time = current_quanta, count = 0; remaining_processes != 0;){
         process_t *current_process = &((pq->entry)[count]);
         process_t *next_process = &((pq->entry)[count+1]);
 
