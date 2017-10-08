@@ -264,6 +264,7 @@ if (h == NULL) {
 
         if (current_quanta > 100) {
             break;
+            printf("We have reached 100 quantum and must stop");
         }
         if(current_process->remaining_run_time <= time_slice && current_process->remaining_run_time > 0){
             time+=current_process->remaining_run_time;
