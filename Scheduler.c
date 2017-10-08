@@ -256,6 +256,11 @@ void rr(process_queue_t *pq, history_t *h) {
 
     }
 
+    for(int i = 0; i < process_size; i++){
+        process_t *current_process = &((pq->entry)[i]);
+        current_process->turnaround_time = 0;
+    }
+
     current_quanta = (pq->entry)[0].arrival_time;
     int process_queue_index = 0, count = 0;
     time = current_quanta;
