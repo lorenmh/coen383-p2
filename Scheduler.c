@@ -263,8 +263,8 @@ if (h == NULL) {
         process_t *next_process = &((pq->entry)[count+1]);
 
         if (current_quanta > 100) {
-            break;
             printf("We have reached 100 quantum and must stop");
+            break;
         }
         if(current_process->remaining_run_time <= time_slice && current_process->remaining_run_time > 0){
             time+=current_process->remaining_run_time;
