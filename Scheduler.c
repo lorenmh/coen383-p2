@@ -260,7 +260,8 @@ if (h == NULL) {
     for(time = 0, count = 0; remaining_processes != 0;){
         process_t *current_process = &((pq->entry)[count]);
         process_t *next_process = &((pq->entry)[count+1]);
-
+        current_process->turnaround_time = 0;
+        
         if (current_quanta > 100) {
             break;
         }
