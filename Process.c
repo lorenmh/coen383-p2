@@ -72,7 +72,9 @@ process_queue_t *create_process_queue(int size) {
     // priority
     RandNum_set_parameter(seed_for_priority, MIN_PRIORITY, MAX_PRIORITY);
     for (int i = 0; i < size; ++i) {
-        newProcessArray[i].priority = RandNum_get_random();
+        uint8_t priority = (uint8_t)RandNum_get_random();
+        newProcessArray[i].priority = priority;
+        newProcessArray[i].virtual_priority = priority;
     }
 
     qsort(newProcessArray, (size_t)size, sizeof(process_t), process_comparator);

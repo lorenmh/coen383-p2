@@ -21,6 +21,7 @@ typedef struct {
 
     uint32_t execution_time;  // for shortest remaining time first 
     uint32_t context_switch_time;  // for aging
+    uint8_t virtual_priority; // for aging
 
     // for result part
     uint32_t turnaround_time;
