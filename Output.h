@@ -35,6 +35,22 @@ void print_history(history_t *history);
 
 
 /**
+ * Allocates mem for a history struct and returns a pointer to it
+ *
+ * @return history pointer to the history structure
+ */
+history_t *create_history(void);
+
+
+/**
+ * frees the memory allocated for a history_t
+ *
+ * @param history pointer to the history structure
+ */
+void free_history(history_t *history);
+
+
+/**
  * generate the result accroding to the scheduler
  *
  * @param process_queue pointer to the process queue
