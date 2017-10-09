@@ -15,10 +15,10 @@ typedef struct {
     uint32_t arrival_time;
     uint32_t expected_run_time;
     uint32_t remaining_run_time;
-    uint32_t priority;
-    uint32_t completed_flag;
-    uint32_t arrival_flag;
-    uint32_t flag;
+    uint8_t priority;
+    uint8_t completed_flag;
+    uint8_t arrival_flag;
+    uint8_t flag;
 
 
     uint32_t execution_time;  // for shortest remaining time first 
