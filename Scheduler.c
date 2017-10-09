@@ -7,6 +7,7 @@
 #include <stdbool.h>
 
 #define MAX_BUFF_SIZE 2000
+#define MAX_NUM_PROC 1000
 #define PREEMPT_QUANTUM 5
 
 void fcfs(process_queue_t *pq, history_t *h) {
@@ -417,12 +418,7 @@ void hpf_pe(process_queue_t *pq, history_t *h) {
 
     char history_buf[MAX_BUFF_SIZE];
 
-    heap_t *priority_heaps[4] = {
-        create_heap(), // priority 1
-        create_heap(), // priority 2
-        create_heap(), // priority 3
-        create_heap()  // priority 4
-    };
+    heap_t *process_heap = create_heap();
 
     int arriving_process_index = 0;
     int quantum = 0;
