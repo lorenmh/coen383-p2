@@ -287,20 +287,19 @@ void rr(process_queue_t *pq, history_t *h) {
                 current_process->response_time = current_quanta;
                 current_process->arrival_flag = 1;
             }
-
             buff_for_history[history_size] = current_process->id;       
             history_size += 1;
-
             current_process->remaining_run_time-=time_slice;
             time+=time_slice;
             current_quanta += 1;
         }
 
-
+        
         if(current_process->remaining_run_time == 0 && current_process->completed_flag == 1){
             remaining_processes--;
             current_process->turnaround_time = 0;
             current_process->turnaround_time+=time - current_process->arrival_time;
+            current_process->completed_flag = 0;
         }
         
 
