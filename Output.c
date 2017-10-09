@@ -21,7 +21,7 @@ void generate_result(process_queue_t *process_queue, result_t *result) {
 
     for (int i = 0; i < process_queue->size; ++i) {
         process_t *current_process = &(process_queue->entry)[i] ;
-        if (current_process->flag == 1) {
+        if (current_process->turnaround_time != UINT32_MAX) {
             finished_process_count += 1;
             sum_response_time += current_process->response_time;
             sum_waiting_time += current_process->turnaround_time - current_process->expected_run_time;
