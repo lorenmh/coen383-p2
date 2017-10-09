@@ -9,6 +9,7 @@
 #define MAX_BUFF_SIZE 2000
 #define MAX_NUM_PROC 1000
 #define PREEMPT_QUANTUM 5
+#define AGING_QUTANTUM 5
 
 void fcfs(process_queue_t *pq, history_t *h) {
     if (h == NULL) {
@@ -321,7 +322,7 @@ void rr(process_queue_t *pq, history_t *h) {
 
 }
 
-void hpf_npe(process_queue_t *pq, history_t *h) {
+void hpf_npe(process_queue_t *pq, history_t *h, bool with_aging) {
     if (pq == NULL || pq->entry == NULL || h == NULL) {
         return;
     }
@@ -352,7 +353,7 @@ void hpf_npe(process_queue_t *pq, history_t *h) {
                 break;
             }
             process_t *new_process = &((pq->entry)[process_index]);
-            int32_t priority = new_process->priority - 1;
+            int32_t priority = new_process->virtual_priority - 1;
             insert(process_pools[priority], new_process->arrival_time, (void*)new_process);
             process_pools_bitmap |= (1 << priority);
             process_index += 1;
@@ -399,6 +400,13 @@ void hpf_npe(process_queue_t *pq, history_t *h) {
         current_process->completed_flag = 1;
 
         current_quanta = end_of_exec;
+
+        if (with_aging) {
+            // too bad!!!
+            // need a "forEach" function support in miniHeap structure
+            // 
+
+        }
 
 
     }
@@ -497,6 +505,4 @@ void hpf_pe(process_queue_t *pq, history_t *h) {
 
 }
 
-void hpf_npe_aging(process_queue_t *pq, history_t *h) {
-    
-}
+

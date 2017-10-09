@@ -2,6 +2,7 @@
 #define SCHEDULER_H
 #include "Process.h"
 #include "Output.h"
+#include <stdbool.h>
 
 
 /**
@@ -43,8 +44,9 @@ void rr(process_queue_t *pq, history_t *h);
  *
  * @param pq pointer to the process queue
  * @param h pointer to the result
+ * @param with_aging whether use aging support or not
  */
-void hpf_npe(process_queue_t *pq, history_t *h);
+void hpf_npe(process_queue_t *pq, history_t *h, bool with_aging);
 
 /**
  * Highest Priority First, preemptive scheduler
@@ -55,13 +57,6 @@ void hpf_npe(process_queue_t *pq, history_t *h);
 void hpf_pe(process_queue_t *pq, history_t *h);
 
 
-/**
- * Highest Priority First, non-preemptive, with aging supported scheduler
- *
- * @param pq pointer to the process queue
- * @param h pointer to the result
- */
-void hpf_npe_aging(process_queue_t *pq, history_t *h);
 
 
 
