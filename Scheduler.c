@@ -242,12 +242,13 @@ void rr(process_queue_t *pq, history_t *h) {
     }
 
     int time = 0, time_slice = 1, remaining_processes, current_quanta = 0;
-    uint32_t process_size = pq->size;               
+    uint32_t process_size = pq->size;               //process queue size
     remaining_processes = process_size;
     
-    char buff_for_history[MAX_BUFF_SIZE];                
-    int history_size = 0;                          
+    char buff_for_history[MAX_BUFF_SIZE];                //history buffer
+    int history_size = 0;                           //History buffer size
 
+    //Idle time before the CPU gets the first process
     for (int idle_time = 0; idle_time < (pq->entry)[0].arrival_time; ++idle_time) {
         buff_for_history[history_size] = '0';
         history_size += 1;
@@ -260,28 +261,36 @@ void rr(process_queue_t *pq, history_t *h) {
     time = current_quanta;
 
     while(remaining_processes != 0){
+        process_t *current_process = &((pq->entry)[process_queue_index]);
+        process_t *next_process = &((pq->entry)[process_queue_index+1]);
 
         if (current_quanta > 100) {
             break;
         }
 
-        process_t *current_process = &((pq->entry)[process_queue_index]);
-        process_t *next_process = &((pq->entry)[process_queue_index+1]);
-
-        if(current_process->arrival_flag == 0){
-            current_process->response_time = current_quanta;
-            current_process->arrival_flag = 1;
-        }
-        buff_for_history[history_size] = current_process->id;       
-        history_size += 1;
-
         if(current_process->remaining_run_time <= time_slice && current_process->remaining_run_time > 0){
+            if(current_process->arrival_flag == 0){
+                current_process->response_time = current_quanta;
+                current_process->arrival_flag = 1;
+            }
+
+            buff_for_history[history_size] = current_process->id;       
+            history_size += 1;
+
             time+=current_process->remaining_run_time;
             current_process->remaining_run_time = 0;
             current_process->completed_flag = 1;
             current_quanta += 1;
         } 
         else if(current_process->remaining_run_time > 0){
+            if(current_process->arrival_flag == 0){
+                current_process->response_time = current_quanta;
+                current_process->arrival_flag = 1;
+            }
+            
+            buff_for_history[history_size] = current_process->id;       
+            history_size += 1;
+
             current_process->remaining_run_time-=time_slice;
             time+=time_slice;
             current_quanta += 1;
