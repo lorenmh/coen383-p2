@@ -213,10 +213,12 @@ void srt(process_queue_t *pq, history_t *h) {
         current_process->execution_time += current_process_running_time;
         current_process_remaining_time -= current_process_running_time;
 
-        if (current_process_remaining_time < 0) {
-            printf("%d\n", current_process_remaining_time);
-            exit(8);
-        }
+        // LOREN: Compiler is throwing a warning saying that unsigned will
+        // never be less than 0, so I am commenting this out
+        //if (current_process_remaining_time < 0) {
+        //    printf("%d\n", current_process_remaining_time);
+        //    exit(8);
+        //}
         current_quanta = next_interrupt_time;
         if (current_process_remaining_time > 0) {
             insert(process_pool, current_process_remaining_time, (void*)current_process);
@@ -394,7 +396,7 @@ void hpf_npe(process_queue_t *pq, history_t *h) {
         }
         current_process->remaining_run_time = 0;
         current_process->context_switch_time = end_of_exec;
-        current_process->flag = 1;
+        current_process->completed_flag = 1;
 
         current_quanta = end_of_exec;
 
