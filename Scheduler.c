@@ -437,7 +437,7 @@ void hpf_pe(process_queue_t *pq, history_t *h) {
     int arriving_process_index = 0;
     int quantum = 0;
 
-    while (quantum < 100) {
+    while (quantum < 100 || !is_empty(process_heap)) {
         // at the beginning of the quantum, check for arrived processes
         while (arriving_process_index < pq->size) {
             process_t *arriving_process = &pq->entry[arriving_process_index];
@@ -476,6 +476,7 @@ void hpf_pe(process_queue_t *pq, history_t *h) {
         process_t *process = (process_t *) extract(process_heap);
 
         if (!process->arrival_flag){
+            if (quantum >= 100) continue;
             process->response_time = quantum - process->arrival_time;
             process->arrival_flag = 1;
         }
