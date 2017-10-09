@@ -496,3 +496,7 @@ void hpf_pe(process_queue_t *pq, history_t *h) {
     h->size = history_size;
 
 }
+
+void hpf_npe_aging(process_queue_t *pq, history_t *h) {
+    
+}

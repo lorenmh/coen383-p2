@@ -55,6 +55,14 @@ void hpf_npe(process_queue_t *pq, history_t *h);
 void hpf_pe(process_queue_t *pq, history_t *h);
 
 
+/**
+ * Highest Priority First, non-preemptive, with aging supported scheduler
+ *
+ * @param pq pointer to the process queue
+ * @param h pointer to the result
+ */
+void hpf_npe_aging(process_queue_t *pq, history_t *h);
+
 
 
 #endif //COEN383_P2_SCHEDULER_H
