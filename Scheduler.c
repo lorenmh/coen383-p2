@@ -7,7 +7,7 @@
 #include <stdbool.h>
 
 #define MAX_BUFF_SIZE 2000
-#define MAX_NUM_PROC 1000
+#define PRIORITY_MULTIPLIER 1000
 #define PREEMPT_QUANTUM 5
 #define AGING_QUTANTUM 5
 
@@ -65,7 +65,7 @@ void sjf(process_queue_t *pq, history_t *h) {
     int arriving_process_index = 0;
     int quantum = 0;
 
-    while (quantum < 100) {
+    while (quantum < 100 && !is_empty(process_heap)) {
         // at the beginning of the quantum, check for arrived processes
         while (arriving_process_index < pq->size) {
             process_t *arriving_process = &pq->entry[arriving_process_index];
@@ -423,6 +423,10 @@ void hpf_npe(process_queue_t *pq, history_t *h, bool with_aging) {
 
 }
 
+uint32_t to_key(int priority, int quantum) {
+    return priority * PRIORITY_MULTIPLIER + quantum;
+}
+
 void hpf_pe(process_queue_t *pq, history_t *h) {
     uint32_t process_size = pq->size;
 
@@ -440,8 +444,8 @@ void hpf_pe(process_queue_t *pq, history_t *h) {
             if (arriving_process->arrival_time <= quantum) {
                 // if the process is arriving, then insert it into the SJF heap
                 insert(
-                    priority_heaps[arriving_process->priority - 1],
-                    arriving_process->expected_run_time,
+                    process_heap,
+                    to_key(arriving_process->priority, quantum),
                     arriving_process
                 );
                 arriving_process_index++;
@@ -450,48 +454,50 @@ void hpf_pe(process_queue_t *pq, history_t *h) {
             }
         }
 
-        //if (is_empty(process_heap)) {
-        //    // the process heap is empty, so let's skip to the quantum where
-        //    // the next process arrives
+        if (is_empty(process_heap)) {
+            // the process heap is empty, so let's skip to the quantum where
+            // the next process arrives
 
-        //    process_t *next_process = &pq->entry[arriving_process_index];
+            process_t *next_process = &pq->entry[arriving_process_index];
 
-        //    if (next_process->arrival_time >= 100) break;
+            if (next_process->arrival_time >= 100) break;
 
-        //    int quantum_delta = next_process->arrival_time - quantum;
+            int quantum_delta = next_process->arrival_time - quantum;
 
-        //    // the CPU is idle while waiting until next process arrives
-        //    memset(
-        //          &history_buf[quantum],
-        //          '0',
-        //          quantum_delta
-        //    );
+            // the CPU is idle while waiting until next process arrives
+            memset(&history_buf[quantum], '0', quantum_delta);
 
-        //    quantum += quantum_delta;
+            quantum += quantum_delta;
 
-        //    continue;
-        //}
+            continue;
+        }
 
-        //// If we've gotten this far then the heap is not empty, lets grab the
-        //// next shortest job
-        //process_t *process = (process_t *) extract(process_heap);
+        // process_heap is not empty, so lets grab the next process
+        process_t *process = (process_t *) extract(process_heap);
 
-        //// update results
-        //process->execution_time = process->expected_run_time;
-        //process->response_time = quantum - process->arrival_time;
+        if (!process->arrival_flag){
+            process->response_time = quantum - process->arrival_time;
+            process->arrival_flag = 1;
+        }
 
-        //// update history
-        //memset(
-        //      &history_buf[quantum],
-        //      process->id,
-        //      process->expected_run_time
-        //);
+        process->remaining_run_time -= 1;
 
-        //// increment quantum because we 'finished the task'
-        //quantum += process->expected_run_time;
+        memset(&history_buf[quantum], process->id, 1);
 
-        //// update turnaround time
-        //process->turnaround_time = quantum - process->arrival_time;
+        quantum += 1;
+
+        if (process->remaining_run_time == 0) {
+            process->execution_time = process->expected_run_time;
+            process->response_time = quantum - process->arrival_time;
+            process->turnaround_time = quantum - process->arrival_time;
+        } else {
+            insert(
+                process_heap,
+                to_key(process->priority, quantum),
+                process
+            );
+        }
+
     }
 
     int history_size = quantum + 1;
