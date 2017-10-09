@@ -280,9 +280,7 @@ void rr(process_queue_t *pq, history_t *h) {
             time+=current_process->remaining_run_time;
             current_process->remaining_run_time = 0;
             current_process->completed_flag = 1;
-            remaining_processes--;
             current_quanta += 1;
-
         }
         else if(current_process->remaining_run_time > 0){
             if(current_process->arrival_flag == 0){
