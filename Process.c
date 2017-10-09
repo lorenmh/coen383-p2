@@ -17,7 +17,8 @@ int process_comparator(const void* p1, const void* p2) {
 
 void print_process(process_t const *process) {
     printf(
-        "{id: '%c'\tat: %d\t\tert: %d\t\ttat: %d\t\trt: %d}",
+        "{id: '%c'\tat: %d\t\tert: %d\t\ttat: %d\t\trt: %d\t\trrt: %d\t\t"
+        "cf: %d\t\taf: %d\t\tf: %d}",
         process->id,
         process->arrival_time,
         process->expected_run_time,
@@ -56,7 +57,6 @@ process_queue_t *create_process_queue(int size) {
 
         newProcessArray[i].context_switch_time = 0;
         newProcessArray[i].execution_time = 0;
-        newProcessArray[i].remaining_run_time = 0;
         newProcessArray[i].completed_flag = 0;
         newProcessArray[i].arrival_flag = 0;
         newProcessArray[i].flag = 0;
