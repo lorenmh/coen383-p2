@@ -7,13 +7,13 @@
 #include <stdbool.h>
 #include <stdint.h>
 
-#define MAX_BUFF_SIZE 2000
-#define PRIORITY_MULTIPLIER 1000
+#define MAX_BUFF_SIZE (2000)
+#define PRIORITY_MULTIPLIER (1000)
 #define PREEMPT_QUANTUM 5
-#define AGING_QUTANTUM 5
+#define AGING_QUTANTUM (5)
 
 
-void Scheduler(process_queue_t *pq, history_t *h, scheduler_context *scheduler_policy) {
+void Scheduler(process_queue_t *pq, history_t *h, scheduler_context *scheduler_policy, bool with_aging) {
     if (pq == NULL || pq->entry == NULL || h == NULL) {
         return;
     }
@@ -93,6 +93,7 @@ void Scheduler(process_queue_t *pq, history_t *h, scheduler_context *scheduler_p
         uint32_t current_process_running_time = next_interrupt_time - current_quanta;
         current_process->execution_time += current_process_running_time;
         current_process->remaining_run_time -= current_process_running_time;
+        current_process->virtual_priority = current_process->priority;
 
 
         current_quanta = next_interrupt_time;
@@ -105,11 +106,24 @@ void Scheduler(process_queue_t *pq, history_t *h, scheduler_context *scheduler_p
             current_process->completed_flag = 1;
         }
 
-        if (scheduler_policy->aging) {
-            // too bad!!!
-            // need a "forEach" function support in miniHeap structure
-            //
-
+        if (with_aging && !is_empty(process_pool)) {
+            // ugly!
+            // but works
+            heap_t *new_pool = create_heap();
+            while (!is_empty(process_pool)) {
+                process_t *process = extract(process_pool);
+                uint8_t new_priority_offset = (uint8_t)((current_quanta - process->context_switch_time) / AGING_QUTANTUM);
+                if (new_priority_offset > process->priority - MIN_PRIORITY) {
+                    process->virtual_priority = MIN_PRIORITY;
+                }else {
+                    process->virtual_priority = process->priority - new_priority_offset;
+                }
+                uint32_t key = scheduler_policy->key_policy(process);
+                insert(new_pool, key, (void*)process);
+            }
+            heap_t *delete = process_pool;
+            process_pool = new_pool;
+            free_heap(delete);
         }
 
 
@@ -124,22 +138,52 @@ void Scheduler(process_queue_t *pq, history_t *h, scheduler_context *scheduler_p
     free_heap(process_pool);
 }
 
-
+//////////////
 uint32_t fcfs_key_policy(process_t *process) {
     return process->arrival_time;
 }
 
-uint32_t fcfs_interrupt_policy(uint32_t current_quanta, process_t *current_process, uint32_t next_arrival, uint32_t rr_quantum) {
-    return current_process->response_time + current_process->arrival_time + current_process->remaining_run_time;
+uint32_t non_preempty_interrupt_policy(uint32_t current_quanta, process_t *current_process, uint32_t next_arrival, uint32_t rr_quantum) {
+    return current_quanta + current_process->remaining_run_time;
 }
 
-const scheduler_context fcfs_context = {
+scheduler_context fcfs_context = {
      fcfs_key_policy,
-     fcfs_interrupt_policy,
-     false
+     non_preempty_interrupt_policy,
 };
 
+//////////////
+uint32_t srt_key_policy(process_t *process) {
+    return process->remaining_run_time;
+}
 
+uint32_t srt_interrupt_policy(uint32_t current_quanta, process_t *current_process, uint32_t next_arrival, uint32_t rr_quantum) {
+    uint32_t end_of_run = current_quanta + current_process->remaining_run_time;
+    if (next_arrival == UINT32_MAX) {
+        return end_of_run;
+    }else {
+        if (end_of_run < next_arrival) {
+            return end_of_run;
+        }else {
+            return next_arrival;
+        }
+    }
+}
+
+scheduler_context srt_context = {
+    srt_key_policy,
+    srt_interrupt_policy,
+};
+
+/////////////
+uint32_t hpf_npe_key_policy(process_t *process) {
+    return process->virtual_priority * PRIORITY_MULTIPLIER + process->arrival_time;
+}
+
+scheduler_context hpf_npe_context = {
+    hpf_npe_key_policy,
+    non_preempty_interrupt_policy
+};
 
 void sjf(process_queue_t *pq, history_t *h) {
     uint32_t process_size = pq->size;
@@ -223,28 +267,7 @@ void sjf(process_queue_t *pq, history_t *h) {
 }
 
 
-uint32_t srt_key_policy(process_t *process) {
-    return process->remaining_run_time;
-}
 
-uint32_t srt_interrupt_policy(uint32_t current_quanta, process_t *current_process, uint32_t next_arrival, uint32_t rr_quantum) {
-    uint32_t end_of_run = current_quanta + current_process->remaining_run_time;
-    if (next_arrival == UINT32_MAX) {
-        return end_of_run;
-    }else {
-        if (end_of_run < next_arrival) {
-            return end_of_run;
-        }else {
-            return next_arrival;
-        }
-    }
-}
-
-const scheduler_context srt_context = {
-    srt_key_policy,
-    srt_interrupt_policy,
-    false
-};
 
 
 void rr(process_queue_t *pq, history_t *h) {

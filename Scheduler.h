@@ -10,15 +10,15 @@
 typedef struct {
     uint32_t (*key_policy)(process_t *);
     uint32_t (*interrupt_policy)(uint32_t, process_t*, uint32_t, uint32_t);
-    bool aging;
 } scheduler_context;
 
 
-extern const scheduler_context fcfs_context;
-extern const scheduler_context srt_context;
+extern scheduler_context fcfs_context;
+extern scheduler_context srt_context;
+extern scheduler_context hpf_npe_context;
 
 
-void Scheduler(process_queue_t *pq, history_t *h, scheduler_context *scheduler_policy);
+void Scheduler(process_queue_t *pq, history_t *h, scheduler_context *scheduler_policy, bool with_aging);
 
 
 /**
