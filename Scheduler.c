@@ -155,12 +155,12 @@ scheduler_context fcfs_context = {
 };
 
 //////////////
-uint32_t srt_key_policy(process_t *process) {
+uint32_t shortest_job_key_policy(process_t *process) {
     return process->remaining_run_time * TIME_MULTIPLIER + process->arrival_time;
 }
 
-uint32_t srt_interrupt_policy(uint32_t current_quanta, process_t *current_process, uint32_t next_arrival,
-                              uint32_t rr_quantum) {
+uint32_t preemptive_interrupt_policy(uint32_t current_quanta, process_t *current_process, uint32_t next_arrival,
+                                     uint32_t rr_quantum) {
     uint32_t end_of_run = current_quanta + current_process->remaining_run_time;
     if (next_arrival == UINT32_MAX) {
         return end_of_run;
@@ -174,8 +174,8 @@ uint32_t srt_interrupt_policy(uint32_t current_quanta, process_t *current_proces
 }
 
 scheduler_context srt_context = {
-    srt_key_policy,
-    srt_interrupt_policy,
+    shortest_job_key_policy,
+    preemptive_interrupt_policy,
 };
 
 /////////////
@@ -189,12 +189,15 @@ scheduler_context hpf_npe_context = {
 };
 
 
+///////////
 scheduler_context sjf_context = {
-    srt_key_policy,
+    shortest_job_key_policy,
     non_preemptive_interrupt_policy
 };
 
 
+
+////////
 uint32_t rr_interrupt_policy(uint32_t current_quanta, process_t *current_process, uint32_t next_arrival,
                              uint32_t rr_quantum) {
     uint32_t end_of_process = current_quanta + current_process->remaining_run_time;
@@ -211,6 +214,13 @@ scheduler_context rr_context = {
     context_switch_key_policy,
     rr_interrupt_policy
 };
+
+
+scheduler_context hpf_pe_context = {
+    hpf_key_policy,
+    preemptive_interrupt_policy
+};
+
 
 uint32_t to_key(int priority, int quantum) {
     return priority * PRIORITY_MULTIPLIER + quantum;
