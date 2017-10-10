@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+#include <stdint.h>
 
 #define MAX_BUFF_SIZE 2000
 #define PRIORITY_MULTIPLIER 1000
@@ -12,7 +13,7 @@
 #define AGING_QUTANTUM 5
 
 
-void Scheduler(process_queue_t *pq, history_t *h, uint32_t (*key_policy)(process_t *), uint32_t (*interrupt_policy)(uint32_t, uint32_t, uint32_t, uint32_t), bool with_aging) {
+void Scheduler(process_queue_t *pq, history_t *h, scheduler_context *scheduler_policy) {
     if (pq == NULL || pq->entry == NULL || h == NULL) {
         return;
     }
@@ -39,7 +40,7 @@ void Scheduler(process_queue_t *pq, history_t *h, uint32_t (*key_policy)(process
                 break;
             }
             process_t *new_process = &((pq->entry)[process_index]);
-            uint32_t key = key_policy(new_process);
+            uint32_t key = scheduler_policy->key_policy(new_process);
             insert(process_pool, key, (void*)new_process);
             process_index += 1;
         }
@@ -80,9 +81,9 @@ void Scheduler(process_queue_t *pq, history_t *h, uint32_t (*key_policy)(process
         uint32_t next_interrupt_time = current_quanta + current_process_remaining_time;
         if (process_index < pq->size) {
             uint32_t next_arrival = (pq->entry)[process_index].arrival_time;
-            next_interrupt_time = interrupt_policy(current_quanta, current_process_remaining_time, next_arrival, PREEMPT_QUANTUM);
+            next_interrupt_time = scheduler_policy->interrupt_policy(current_quanta, current_process_remaining_time, next_arrival, PREEMPT_QUANTUM);
         }else {
-            next_interrupt_time = interrupt_policy(current_quanta, current_process_remaining_time, UINT32_MAX, PREEMPT_QUANTUM);
+            next_interrupt_time = scheduler_policy->interrupt_policy(current_quanta, current_process_remaining_time, UINT32_MAX, PREEMPT_QUANTUM);
         }
         for (uint32_t i = current_quanta; i < next_interrupt_time; ++i) {
             buff_for_history[history_size] = current_process->id;
@@ -99,7 +100,7 @@ void Scheduler(process_queue_t *pq, history_t *h, uint32_t (*key_policy)(process
             current_process->turnaround_time = current_quanta - current_process->arrival_time;
         }
 
-        if (with_aging) {
+        if (scheduler_policy->aging) {
             // too bad!!!
             // need a "forEach" function support in miniHeap structure
             //
@@ -117,6 +118,22 @@ void Scheduler(process_queue_t *pq, history_t *h, uint32_t (*key_policy)(process
     // clean up
     free_heap(process_pool);
 }
+
+
+uint32_t fcfs_key_policy(process_t *process) {
+    return process->arrival_time;
+}
+
+uint32_t fcfs_interrupt_policy(uint32_t current_quanta, uint32_t current_process_remaining_time, uint32_t next_arrival, uint32_t rr_quantum) {
+    return current_quanta + current_process_remaining_time;
+}
+
+const scheduler_context fcfs_context = {
+     fcfs_key_policy,
+     fcfs_interrupt_policy,
+     false
+};
+
 
 
 void fcfs(process_queue_t *pq, history_t *h) {
