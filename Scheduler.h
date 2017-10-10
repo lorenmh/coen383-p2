@@ -9,23 +9,16 @@
 
 typedef struct {
     uint32_t (*key_policy)(process_t *);
-    uint32_t (*interrupt_policy)(uint32_t, uint32_t, uint32_t, uint32_t);
+    uint32_t (*interrupt_policy)(uint32_t, process_t*, uint32_t, uint32_t);
     bool aging;
 } scheduler_context;
 
 
 extern const scheduler_context fcfs_context;
+extern const scheduler_context srt_context;
 
 
 void Scheduler(process_queue_t *pq, history_t *h, scheduler_context *scheduler_policy);
-
-/**
- * First Come First Serve scheduler
- *
- * @param pq pointer to the process queue
- * @param h pointer to the result
- */
-void fcfs(process_queue_t *pq, history_t *h);
 
 
 /**
@@ -36,14 +29,6 @@ void fcfs(process_queue_t *pq, history_t *h);
  */
 void sjf(process_queue_t *pq, history_t *h);
 
-
-/**
- * Shortest Remaining Time First scheduler
- *
- * @param pq pointer to the process queue
- * @param h pointer to the result
- */
-void srt(process_queue_t *pq, history_t *h);
 
 /**
  * Round Robin scheduler

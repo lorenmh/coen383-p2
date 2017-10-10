@@ -51,8 +51,8 @@ int main(int argc, char* argv[]) {
 
     history_t h = { NULL, 0 };
 
-//    Scheduler(pq, &h, &fcfs_context);
-    fcfs(pq, &h);
+    Scheduler(pq, &h, &srt_context);
+//    srt(pq, &h);
 
 
 
