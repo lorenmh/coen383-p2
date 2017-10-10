@@ -51,7 +51,7 @@ int main(int argc, char* argv[]) {
 
     history_t h = { NULL, 0 };
 
-    Scheduler(pq, &h, &hpf_pe_context, false);
+    Scheduler(pq, &h, &rr_context, false);
 //    hpf_pe(pq, &h);
 
 

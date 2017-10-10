@@ -161,16 +161,7 @@ uint32_t shortest_job_key_policy(process_t *process) {
 
 uint32_t preemptive_interrupt_policy(uint32_t current_quanta, process_t *current_process, uint32_t next_arrival,
                                      uint32_t rr_quantum) {
-    uint32_t end_of_run = current_quanta + current_process->remaining_run_time;
-    if (next_arrival == UINT32_MAX) {
-        return end_of_run;
-    }else {
-        if (end_of_run < next_arrival) {
-            return end_of_run;
-        }else {
-            return next_arrival;
-        }
-    }
+    return current_quanta + 1;
 }
 
 scheduler_context srt_context = {
@@ -180,7 +171,7 @@ scheduler_context srt_context = {
 
 /////////////
 uint32_t hpf_key_policy(process_t *process) {
-    return process->virtual_priority * PRIORITY_MULTIPLIER + process->arrival_time;
+    return process->virtual_priority * PRIORITY_MULTIPLIER + process->context_switch_time;
 }
 
 scheduler_context hpf_npe_context = {
