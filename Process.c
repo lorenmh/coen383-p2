@@ -55,7 +55,7 @@ process_queue_t *create_process_queue(int size) {
         newProcessArray[i].id = PIDS[i]; // will error if size > 52
         newProcessArray[i].arrival_time = RandNum_get_random();
 
-        newProcessArray[i].context_switch_time = 0;
+        newProcessArray[i].context_switch_time = newProcessArray[i].arrival_time;
         newProcessArray[i].execution_time = 0;
         newProcessArray[i].completed_flag = 0;
         newProcessArray[i].arrival_flag = 0;

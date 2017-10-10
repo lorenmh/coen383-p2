@@ -16,7 +16,8 @@ typedef struct {
 extern scheduler_context fcfs_context;
 extern scheduler_context srt_context;
 extern scheduler_context hpf_npe_context;
-
+extern scheduler_context sjf_context;
+extern scheduler_context rr_context;
 
 void Scheduler(process_queue_t *pq, history_t *h, scheduler_context *scheduler_policy, bool with_aging);
 
