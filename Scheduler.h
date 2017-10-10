@@ -29,6 +29,15 @@ void Scheduler(process_queue_t *pq, history_t *h, scheduler_context *scheduler_p
 
 
 /**
+ * First Come First Serve scheduler
+ *
+ * @param pq pointer to the process queue
+ * @param h pointer to the result
+ */
+void fcfs(process_queue_t *pq, history_t *h);
+
+
+/**
  * Shortest Job First scheduler
  *
  * @param pq pointer to the process queue
@@ -36,6 +45,14 @@ void Scheduler(process_queue_t *pq, history_t *h, scheduler_context *scheduler_p
  */
 void sjf(process_queue_t *pq, history_t *h);
 
+
+/**
+ * Shortest Remaining Time First scheduler
+ *
+ * @param pq pointer to the process queue
+ * @param h pointer to the result
+ */
+void srt(process_queue_t *pq, history_t *h);
 
 /**
  * Round Robin scheduler
@@ -61,6 +78,8 @@ void hpf_npe(process_queue_t *pq, history_t *h, bool with_aging);
  * @param h pointer to the result
  */
 void hpf_pe(process_queue_t *pq, history_t *h);
+
+
 
 
 
