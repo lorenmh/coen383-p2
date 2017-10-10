@@ -4,12 +4,17 @@
 #include "Output.h"
 #include <stdbool.h>
 
+#define MAX_BUFF_SIZE (2000)
+#define PRIORITY_MULTIPLIER (10000)
+#define TIME_MULTIPLIER (10000)
+#define AGING_QUANTUM (5)
+#define RR_QUANTUM (1)
 
 
 
 typedef struct {
     uint32_t (*key_policy)(process_t *);
-    uint32_t (*interrupt_policy)(uint32_t, process_t*, uint32_t, uint32_t);
+    uint32_t (*interrupt_policy)(uint32_t, process_t*);
 } scheduler_context;
 
 

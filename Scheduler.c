@@ -7,11 +7,7 @@
 #include <stdbool.h>
 #include <stdint.h>
 
-#define MAX_BUFF_SIZE (2000)
-#define PRIORITY_MULTIPLIER (1000)
-#define TIME_MULTIPLIER (1000)
-#define PREEMPT_QUANTUM 5
-#define AGING_QUTANTUM (5)
+
 
 
 void Scheduler(process_queue_t *pq, history_t *h, scheduler_context *scheduler_policy, bool with_aging) {
@@ -82,9 +78,9 @@ void Scheduler(process_queue_t *pq, history_t *h, scheduler_context *scheduler_p
         uint32_t next_interrupt_time;
         if (process_index < pq->size) {
             uint32_t next_arrival = (pq->entry)[process_index].arrival_time;
-            next_interrupt_time = scheduler_policy->interrupt_policy(current_quanta, current_process, next_arrival, 1);
+            next_interrupt_time = scheduler_policy->interrupt_policy(current_quanta, current_process);
         }else {
-            next_interrupt_time = scheduler_policy->interrupt_policy(current_quanta, current_process, UINT32_MAX, 1);
+            next_interrupt_time = scheduler_policy->interrupt_policy(current_quanta, current_process);
         }
         for (uint32_t i = current_quanta; i < next_interrupt_time; ++i) {
             buff_for_history[history_size] = current_process->id;
@@ -112,7 +108,7 @@ void Scheduler(process_queue_t *pq, history_t *h, scheduler_context *scheduler_p
             heap_t *new_pool = create_heap();
             while (!is_empty(process_pool)) {
                 process_t *process = extract(process_pool);
-                uint8_t new_priority_offset = (uint8_t)((current_quanta - process->context_switch_time) / AGING_QUTANTUM);
+                uint8_t new_priority_offset = (uint8_t)((current_quanta - process->context_switch_time) / AGING_QUANTUM);
                 if (new_priority_offset > process->priority - MIN_PRIORITY) {
                     process->virtual_priority = MIN_PRIORITY;
                 }else {
@@ -144,8 +140,7 @@ uint32_t context_switch_key_policy(process_t *process) {
 
 }
 
-uint32_t non_preemptive_interrupt_policy(uint32_t current_quanta, process_t *current_process, uint32_t next_arrival,
-                                         uint32_t rr_quantum) {
+uint32_t non_preemptive_interrupt_policy(uint32_t current_quanta, process_t *current_process) {
     return current_quanta + current_process->remaining_run_time;
 }
 
@@ -159,8 +154,7 @@ uint32_t shortest_job_key_policy(process_t *process) {
     return process->remaining_run_time * TIME_MULTIPLIER + process->arrival_time;
 }
 
-uint32_t preemptive_interrupt_policy(uint32_t current_quanta, process_t *current_process, uint32_t next_arrival,
-                                     uint32_t rr_quantum) {
+uint32_t preemptive_interrupt_policy(uint32_t current_quanta, process_t *current_process) {
     return current_quanta + 1;
 }
 
@@ -189,10 +183,9 @@ scheduler_context sjf_context = {
 
 
 ////////
-uint32_t rr_interrupt_policy(uint32_t current_quanta, process_t *current_process, uint32_t next_arrival,
-                             uint32_t rr_quantum) {
+uint32_t rr_interrupt_policy(uint32_t current_quanta, process_t *current_process) {
     uint32_t end_of_process = current_quanta + current_process->remaining_run_time;
-    uint32_t end_of_rr = current_quanta + rr_quantum;
+    uint32_t end_of_rr = current_quanta + RR_QUANTUM;
     if (end_of_process > end_of_rr) {
         return end_of_rr;
     }else {

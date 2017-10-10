@@ -8,7 +8,7 @@
 #define MAX_ACCEPTABLE_ARRIVAL_TIME 99
 #define MAX_SERVICE_TIME 20
 
-#define INIT_SEED (6)
+#define INIT_SEED (3143211)
 
 typedef struct {
     char id;
