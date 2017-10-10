@@ -76,12 +76,16 @@ void Scheduler(process_queue_t *pq, history_t *h, scheduler_context *scheduler_p
 
 
         uint32_t next_interrupt_time;
-        if (process_index < pq->size) {
-            uint32_t next_arrival = (pq->entry)[process_index].arrival_time;
-            next_interrupt_time = scheduler_policy->interrupt_policy(current_quanta, current_process);
-        }else {
-            next_interrupt_time = scheduler_policy->interrupt_policy(current_quanta, current_process);
-        }
+
+        // preemptive would always be 1 quantum, so we dont need to check this
+//        if (process_index < pq->size) {
+//            uint32_t next_arrival = (pq->entry)[process_index].arrival_time;
+//            next_interrupt_time = current_quanta + scheduler_policy->interrupt_policy(current_process);
+//        }else {
+//            next_interrupt_time = current_quanta + scheduler_policy->interrupt_policy(current_process);
+//        }
+
+        next_interrupt_time = current_quanta + scheduler_policy->interrupt_policy(current_process);
         for (uint32_t i = current_quanta; i < next_interrupt_time; ++i) {
             buff_for_history[history_size] = current_process->id;
             history_size += 1;
@@ -140,8 +144,8 @@ uint32_t context_switch_key_policy(process_t *process) {
 
 }
 
-uint32_t non_preemptive_interrupt_policy(uint32_t current_quanta, process_t *current_process) {
-    return current_quanta + current_process->remaining_run_time;
+uint32_t non_preemptive_interrupt_policy(process_t *current_process) {
+    return current_process->remaining_run_time;
 }
 
 scheduler_context fcfs_context = {
@@ -154,8 +158,8 @@ uint32_t shortest_job_key_policy(process_t *process) {
     return process->remaining_run_time * TIME_MULTIPLIER + process->arrival_time;
 }
 
-uint32_t preemptive_interrupt_policy(uint32_t current_quanta, process_t *current_process) {
-    return current_quanta + 1;
+uint32_t preemptive_interrupt_policy(process_t *current_process) {
+    return 1;
 }
 
 scheduler_context srt_context = {
@@ -183,13 +187,11 @@ scheduler_context sjf_context = {
 
 
 ////////
-uint32_t rr_interrupt_policy(uint32_t current_quanta, process_t *current_process) {
-    uint32_t end_of_process = current_quanta + current_process->remaining_run_time;
-    uint32_t end_of_rr = current_quanta + RR_QUANTUM;
-    if (end_of_process > end_of_rr) {
-        return end_of_rr;
+uint32_t rr_interrupt_policy(process_t *current_process) {
+    if (current_process->remaining_run_time > RR_QUANTUM) {
+        return RR_QUANTUM;
     }else {
-        return end_of_process;
+        return current_process->remaining_run_time;
     }
 
 }

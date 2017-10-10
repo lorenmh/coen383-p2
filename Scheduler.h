@@ -14,7 +14,7 @@
 
 typedef struct {
     uint32_t (*key_policy)(process_t *);
-    uint32_t (*interrupt_policy)(uint32_t, process_t*);
+    uint32_t (*interrupt_policy)(process_t*);
 } scheduler_context;
 
 
