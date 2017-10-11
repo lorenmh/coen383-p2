@@ -3,410 +3,410 @@ RUN 1 ==========================================================================
 
 Process Queue:
 [
-	{id: K, arrival_time: 19, priority: 1, expected_run_time:  4}
-	{id: A, arrival_time: 24, priority: 3, expected_run_time:  8}
-	{id: B, arrival_time: 27, priority: 2, expected_run_time:  7}
-	{id: J, arrival_time: 28, priority: 4, expected_run_time: 20}
-	{id: H, arrival_time: 33, priority: 1, expected_run_time: 12}
-	{id: F, arrival_time: 33, priority: 2, expected_run_time: 11}
-	{id: D, arrival_time: 41, priority: 2, expected_run_time: 20}
-	{id: L, arrival_time: 63, priority: 3, expected_run_time:  1}
-	{id: C, arrival_time: 66, priority: 4, expected_run_time:  2}
-	{id: G, arrival_time: 70, priority: 4, expected_run_time: 14}
-	{id: E, arrival_time: 79, priority: 3, expected_run_time: 14}
-	{id: I, arrival_time: 91, priority: 4, expected_run_time:  9}
+	{id: L, arrival_time:  6, priority: 3, expected_run_time: 13}
+	{id: A, arrival_time:  9, priority: 1, expected_run_time: 17}
+	{id: D, arrival_time: 15, priority: 3, expected_run_time: 12}
+	{id: G, arrival_time: 25, priority: 1, expected_run_time: 19}
+	{id: F, arrival_time: 38, priority: 3, expected_run_time:  6}
+	{id: H, arrival_time: 38, priority: 3, expected_run_time:  1}
+	{id: I, arrival_time: 40, priority: 3, expected_run_time: 15}
+	{id: J, arrival_time: 54, priority: 3, expected_run_time: 11}
+	{id: B, arrival_time: 56, priority: 4, expected_run_time: 17}
+	{id: E, arrival_time: 71, priority: 2, expected_run_time: 19}
+	{id: K, arrival_time: 90, priority: 1, expected_run_time:  7}
+	{id: C, arrival_time: 96, priority: 4, expected_run_time: 16}
 ]
 
 FCFS
 0    5    10   15   20   25   30   35   40   45   50   55   60   65   70   75   80   85   90   95   100  
 |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    
-0000000000000000000KKKK0AAAAAAAABBBBBBBJJJJJJJJJJJJJJJJJJJJHHHHHHHHHHHHFFFFFFFFFFFDDDDDDDDDDDDDDDDDDDD
-average {response_time: 17.286, turnaround_time: 29.000, waiting_time: 17.286}
-throughput: 0.0686 process completed per quantum
+000000LLLLLLLLLLLLLAAAAAAAAAAAAAAAAADDDDDDDDDDDDGGGGGGGGGGGGGGGGGGGHFFFFFFIIIIIIIIIIIIIIIJJJJJJJJJJJ
+average {response_time: 22.750, turnaround_time: 34.500, waiting_time: 22.750}
+throughput: 0.0800 process completed per quantum
 
 SJF
 0    5    10   15   20   25   30   35   40   45   50   55   60   65   70   75   80   85   90   95   100  105  
 |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    
-0000000000000000000KKKK0AAAAAAAABBBBBBBFFFFFFFFFFFHHHHHHHHHHHHJJJJJJJJJJJJJJJJJJJJLCCEEEEEEEEEEEEEEIIIIIIIII
-average {response_time: 11.200, turnaround_time: 20.000, waiting_time: 11.200}
-throughput: 0.0926 process completed per quantum
+000000LLLLLLLLLLLLLDDDDDDDDDDDDAAAAAAAAAAAAAAAAAHFFFFFFJJJJJJJJJJJIIIIIIIIIIIIIIIBBBBBBBBBBBBBBBBBKKKKKKK
+average {response_time: 11.889, turnaround_time: 22.889, waiting_time: 11.889}
+throughput: 0.0857 process completed per quantum
 
 SRT
-0    5    10   15   20   25   30   35   40   45   50   55   60   65   70   75   80   85   90   95   100  105  110  115  120  
-|    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    
-0000000000000000000KKKK0AAAAAAAABBBBBBBFFFFFFFFFFFHHHHHHHHHHHHDLDDCCDDGGGGGGGGGGGGGGEEEEEEEEEEEEEEIIIIIIIIIDDDDDDDDDDDDDDD
-average {response_time: 5.545, turnaround_time: 18.455, waiting_time: 9.182}
-throughput: 0.0902 process completed per quantum
+0    5    10   15   20   25   30   35   40   45   50   55   60   65   70   75   80   85   90   95   100  105  
+|    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    
+000000LLLLLLLLLLLLLDDDDDDDDDDDDAAAAAAAHFFFFFFAAAAAAAAAAJJJJJJJJJJJIIIIIIIIIIIIIIIBBBBBBBBBKKKKKKKBBBBBBBB
+average {response_time: 8.778, turnaround_time: 21.333, waiting_time: 10.333}
+throughput: 0.0857 process completed per quantum
 
 RR
 0    5    10   15   20   25   30   35   40   45   50   55   60   65   70   75   80   85   90   95   100  105  110  115  120  125  130  135  140  
 |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    
-0000000000000000000KKKK0AAAABAJBAJBAHFJBAHFJBDHFJBDHFJBDHFJDHFJDHFLJDHCFJDHGCFJDHGFEJDHGFEJDHGEJIDGEJIDGEJIDGEJIDGEJIDGEJIDGEJIDGEIDGEIDGEDGEE
-average {response_time: 2.917, turnaround_time: 46.083, waiting_time: 35.917}
-throughput: 0.0845 process completed per quantum
-
-HPF - Non-Preemptive
-0    5    10   15   20   25   30   35   40   45   50   55   60   65   70   75   80   85   90   95   100  105  110  115  
-|    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    
-0000000000000000000KKKK0AAAAAAAABBBBBBBHHHHHHHHHHHHFFFFFFFFFFFDDDDDDDDDDDDDDDDDDDDLEEEEEEEEEEEEEEJJJJJJJJJJJJJJJJJJJJ
-average {response_time: 15.778, turnaround_time: 26.556, waiting_time: 15.778}
+000000LLLLALALALADLADLADLADLGADLGADLGADGAFHDGIAFDGIAFDGIAFDJGIBAFDJGIBAFJGIBEAJGIBEJGIBEJGIBEJKGIBEJKGIBEJKGIBEJKGIBEJKGIBEKGIBEKBEBEBEBEBEEEEE
+average {response_time: 3.455, turnaround_time: 57.455, waiting_time: 45.000}
 throughput: 0.0769 process completed per quantum
 
+HPF - Non-Preemptive
+0    5    10   15   20   25   30   35   40   45   50   55   60   65   70   75   80   85   90   95   100  
+|    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    
+000000LLLLLLLLLLLLLAAAAAAAAAAAAAAAAAGGGGGGGGGGGGGGGGGGGDDDDDDDDDDDDHFFFFFFEEEEEEEEEEEEEEEEEEEKKKKKKK
+average {response_time: 15.750, turnaround_time: 27.500, waiting_time: 15.750}
+throughput: 0.0800 process completed per quantum
+
 HPF - Preemptive
-0    5    10   15   20   25   30   35   40   45   50   55   60   65   70   75   80   85   90   95   100  105  110  115  120  125  130  
-|    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    
-0000000000000000000KKKK0AAABBBBBBHHHHHHHHHHHHBFDFDFDFDFDFDFDFDFDFDFDDDDDDDDDDALAEAEAEAEEEEEEEEEEEJCGJCGJGJGJGJGJGJGJGJGJGJGJGJGJJJJJJ
-average {response_time: 15.000, turnaround_time: 36.273, waiting_time: 26.000}
-throughput: 0.0827 process completed per quantum
+0    5    10   15   20   25   30   35   40   45   50   55   60   65   70   75   80   85   90   95   100  105  110  115  120  125  
+|    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    
+000000LLLAAAAAAAAAAAAAAAAAGGGGGGGGGGGGGGGGGGGLDHFILDFILDFIJLDFIJLDFIJLDEEEEEEEEEEEEEEEEEEEKKKKKKKFIJLDIJLDIJLDIJLDIJDIJDIJIJII
+average {response_time: 6.400, turnaround_time: 50.100, waiting_time: 38.100}
+throughput: 0.0794 process completed per quantum
 
 HPF - Non-Preemptive with Aging
 0    5    10   15   20   25   30   35   40   45   50   55   60   65   70   75   80   85   90   95   100  
 |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    
-0000000000000000000KKKK0AAAAAAAABBBBBBBHHHHHHHHHHHHFFFFFFFFFFFJJJJJJJJJJJJJJJJJJJJDDDDDDDDDDDDDDDDDDDD
-average {response_time: 14.857, turnaround_time: 26.571, waiting_time: 14.857}
-throughput: 0.0686 process completed per quantum
+000000LLLLLLLLLLLLLAAAAAAAAAAAAAAAAAGGGGGGGGGGGGGGGGGGGDDDDDDDDDDDDHFFFFFFJJJJJJJJJJJEEEEEEEEEEEEEEEEEEE
+average {response_time: 19.250, turnaround_time: 31.500, waiting_time: 19.250}
+throughput: 0.0769 process completed per quantum
 
 HPF - Preemptive with Aging
-0    5    10   15   20   25   30   35   40   45   50   55   60   65   70   75   80   85   90   95   100  105  110  115  120  125  130  
-|    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    
-0000000000000000000KKKK0AAABBBBBAHHHHBHFBAHFAJHFAJDHFAJDHFJDHFJDHFJDHFJDFJDLFJDFJDJCDJCGDJGEDJGEDJGEDJGEDJGEDJGEDJGEDJGEDGEDGEGEGEGEE
-average {response_time: 8.182, turnaround_time: 41.182, waiting_time: 30.909}
-throughput: 0.0827 process completed per quantum
+0    5    10   15   20   25   30   35   40   45   50   55   60   65   70   75   80   85   90   95   100  105  110  115  120  125  130  135  140  
+|    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    
+000000LLLAAAAAAAAAALALALALAGDLAGDLAGDLAGDLGDLGDLGDFGHDIFGDIFGDIFGDIJFGDIJFGBIJGEBIJGEBIJGEBIJGEKBIJGEKBIJGEKBIJEKBIJEKBIJEKBIEKBEBEBEBEBEBEBEEE
+average {response_time: 9.091, turnaround_time: 55.000, waiting_time: 42.545}
+throughput: 0.0769 process completed per quantum
 
 ================================================================================
 RUN 2 ==========================================================================
 
 Process Queue:
 [
-	{id: K, arrival_time: 19, priority: 1, expected_run_time:  4}
-	{id: A, arrival_time: 24, priority: 3, expected_run_time:  8}
-	{id: B, arrival_time: 27, priority: 2, expected_run_time:  7}
-	{id: J, arrival_time: 28, priority: 4, expected_run_time: 20}
-	{id: H, arrival_time: 33, priority: 1, expected_run_time: 12}
-	{id: F, arrival_time: 33, priority: 2, expected_run_time: 11}
-	{id: D, arrival_time: 41, priority: 2, expected_run_time: 20}
-	{id: L, arrival_time: 63, priority: 3, expected_run_time:  1}
-	{id: C, arrival_time: 66, priority: 4, expected_run_time:  2}
-	{id: G, arrival_time: 70, priority: 4, expected_run_time: 14}
-	{id: E, arrival_time: 79, priority: 3, expected_run_time: 14}
-	{id: I, arrival_time: 91, priority: 4, expected_run_time:  9}
+	{id: L, arrival_time:  6, priority: 3, expected_run_time: 13}
+	{id: A, arrival_time:  9, priority: 1, expected_run_time: 17}
+	{id: D, arrival_time: 15, priority: 3, expected_run_time: 12}
+	{id: G, arrival_time: 25, priority: 1, expected_run_time: 19}
+	{id: F, arrival_time: 38, priority: 3, expected_run_time:  6}
+	{id: H, arrival_time: 38, priority: 3, expected_run_time:  1}
+	{id: I, arrival_time: 40, priority: 3, expected_run_time: 15}
+	{id: J, arrival_time: 54, priority: 3, expected_run_time: 11}
+	{id: B, arrival_time: 56, priority: 4, expected_run_time: 17}
+	{id: E, arrival_time: 71, priority: 2, expected_run_time: 19}
+	{id: K, arrival_time: 90, priority: 1, expected_run_time:  7}
+	{id: C, arrival_time: 96, priority: 4, expected_run_time: 16}
 ]
 
 FCFS
 0    5    10   15   20   25   30   35   40   45   50   55   60   65   70   75   80   85   90   95   100  
 |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    
-0000000000000000000KKKK0AAAAAAAABBBBBBBJJJJJJJJJJJJJJJJJJJJHHHHHHHHHHHHFFFFFFFFFFFDDDDDDDDDDDDDDDDDDDD
-average {response_time: 17.286, turnaround_time: 29.000, waiting_time: 17.286}
-throughput: 0.0686 process completed per quantum
+000000LLLLLLLLLLLLLAAAAAAAAAAAAAAAAADDDDDDDDDDDDGGGGGGGGGGGGGGGGGGGHFFFFFFIIIIIIIIIIIIIIIJJJJJJJJJJJ
+average {response_time: 22.750, turnaround_time: 34.500, waiting_time: 22.750}
+throughput: 0.0800 process completed per quantum
 
 SJF
 0    5    10   15   20   25   30   35   40   45   50   55   60   65   70   75   80   85   90   95   100  105  
 |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    
-0000000000000000000KKKK0AAAAAAAABBBBBBBFFFFFFFFFFFHHHHHHHHHHHHJJJJJJJJJJJJJJJJJJJJLCCEEEEEEEEEEEEEEIIIIIIIII
-average {response_time: 11.200, turnaround_time: 20.000, waiting_time: 11.200}
-throughput: 0.0926 process completed per quantum
+000000LLLLLLLLLLLLLDDDDDDDDDDDDAAAAAAAAAAAAAAAAAHFFFFFFJJJJJJJJJJJIIIIIIIIIIIIIIIBBBBBBBBBBBBBBBBBKKKKKKK
+average {response_time: 11.889, turnaround_time: 22.889, waiting_time: 11.889}
+throughput: 0.0857 process completed per quantum
 
 SRT
-0    5    10   15   20   25   30   35   40   45   50   55   60   65   70   75   80   85   90   95   100  105  110  115  120  
-|    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    
-0000000000000000000KKKK0AAAAAAAABBBBBBBFFFFFFFFFFFHHHHHHHHHHHHDLDDCCDDGGGGGGGGGGGGGGEEEEEEEEEEEEEEIIIIIIIIIDDDDDDDDDDDDDDD
-average {response_time: 5.545, turnaround_time: 18.455, waiting_time: 9.182}
-throughput: 0.0902 process completed per quantum
+0    5    10   15   20   25   30   35   40   45   50   55   60   65   70   75   80   85   90   95   100  105  
+|    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    
+000000LLLLLLLLLLLLLDDDDDDDDDDDDAAAAAAAHFFFFFFAAAAAAAAAAJJJJJJJJJJJIIIIIIIIIIIIIIIBBBBBBBBBKKKKKKKBBBBBBBB
+average {response_time: 8.778, turnaround_time: 21.333, waiting_time: 10.333}
+throughput: 0.0857 process completed per quantum
 
 RR
 0    5    10   15   20   25   30   35   40   45   50   55   60   65   70   75   80   85   90   95   100  105  110  115  120  125  130  135  140  
 |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    
-0000000000000000000KKKK0AAAABAJBAJBAHFJBAHFJBDHFJBDHFJBDHFJDHFJDHFLJDHCFJDHGCFJDHGFEJDHGFEJDHGEJIDGEJIDGEJIDGEJIDGEJIDGEJIDGEJIDGEIDGEIDGEDGEE
-average {response_time: 2.917, turnaround_time: 46.083, waiting_time: 35.917}
-throughput: 0.0845 process completed per quantum
-
-HPF - Non-Preemptive
-0    5    10   15   20   25   30   35   40   45   50   55   60   65   70   75   80   85   90   95   100  105  110  115  
-|    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    
-0000000000000000000KKKK0AAAAAAAABBBBBBBHHHHHHHHHHHHFFFFFFFFFFFDDDDDDDDDDDDDDDDDDDDLEEEEEEEEEEEEEEJJJJJJJJJJJJJJJJJJJJ
-average {response_time: 15.778, turnaround_time: 26.556, waiting_time: 15.778}
+000000LLLLALALALADLADLADLADLGADLGADLGADGAFHDGIAFDGIAFDGIAFDJGIBAFDJGIBAFJGIBEAJGIBEJGIBEJGIBEJKGIBEJKGIBEJKGIBEJKGIBEJKGIBEKGIBEKBEBEBEBEBEEEEE
+average {response_time: 3.455, turnaround_time: 57.455, waiting_time: 45.000}
 throughput: 0.0769 process completed per quantum
 
+HPF - Non-Preemptive
+0    5    10   15   20   25   30   35   40   45   50   55   60   65   70   75   80   85   90   95   100  
+|    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    
+000000LLLLLLLLLLLLLAAAAAAAAAAAAAAAAAGGGGGGGGGGGGGGGGGGGDDDDDDDDDDDDHFFFFFFEEEEEEEEEEEEEEEEEEEKKKKKKK
+average {response_time: 15.750, turnaround_time: 27.500, waiting_time: 15.750}
+throughput: 0.0800 process completed per quantum
+
 HPF - Preemptive
-0    5    10   15   20   25   30   35   40   45   50   55   60   65   70   75   80   85   90   95   100  105  110  115  120  125  130  
-|    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    
-0000000000000000000KKKK0AAABBBBBBHHHHHHHHHHHHBFDFDFDFDFDFDFDFDFDFDFDDDDDDDDDDALAEAEAEAEEEEEEEEEEEJCGJCGJGJGJGJGJGJGJGJGJGJGJGJGJJJJJJ
-average {response_time: 15.000, turnaround_time: 36.273, waiting_time: 26.000}
-throughput: 0.0827 process completed per quantum
+0    5    10   15   20   25   30   35   40   45   50   55   60   65   70   75   80   85   90   95   100  105  110  115  120  125  
+|    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    
+000000LLLAAAAAAAAAAAAAAAAAGGGGGGGGGGGGGGGGGGGLDHFILDFILDFIJLDFIJLDFIJLDEEEEEEEEEEEEEEEEEEEKKKKKKKFIJLDIJLDIJLDIJLDIJDIJDIJIJII
+average {response_time: 6.400, turnaround_time: 50.100, waiting_time: 38.100}
+throughput: 0.0794 process completed per quantum
 
 HPF - Non-Preemptive with Aging
 0    5    10   15   20   25   30   35   40   45   50   55   60   65   70   75   80   85   90   95   100  
 |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    
-0000000000000000000KKKK0AAAAAAAABBBBBBBHHHHHHHHHHHHFFFFFFFFFFFJJJJJJJJJJJJJJJJJJJJDDDDDDDDDDDDDDDDDDDD
-average {response_time: 14.857, turnaround_time: 26.571, waiting_time: 14.857}
-throughput: 0.0686 process completed per quantum
+000000LLLLLLLLLLLLLAAAAAAAAAAAAAAAAAGGGGGGGGGGGGGGGGGGGDDDDDDDDDDDDHFFFFFFJJJJJJJJJJJEEEEEEEEEEEEEEEEEEE
+average {response_time: 19.250, turnaround_time: 31.500, waiting_time: 19.250}
+throughput: 0.0769 process completed per quantum
 
 HPF - Preemptive with Aging
-0    5    10   15   20   25   30   35   40   45   50   55   60   65   70   75   80   85   90   95   100  105  110  115  120  125  130  
-|    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    
-0000000000000000000KKKK0AAABBBBBAHHHHBHFBAHFAJHFAJDHFAJDHFJDHFJDHFJDHFJDLFJDFJDFJDCJDCJDGJDGEJDGEJDGEJDGEJDGEJDGEJDGEJDGEDGEGEGEGEGEE
-average {response_time: 8.000, turnaround_time: 40.636, waiting_time: 30.364}
-throughput: 0.0827 process completed per quantum
+0    5    10   15   20   25   30   35   40   45   50   55   60   65   70   75   80   85   90   95   100  105  110  115  120  125  130  135  140  
+|    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    
+000000LLLAAAAAAAAAALALALALAGDLAGDLAGDLAGDLGDLGDLGDFGHDIFGDIFGDIFGDIJFGDIJFGBIJGEBIJGEBIJGEBIJGEKBIJGEKBIJGEKBIJEKBIJEKBIJEKBIEKBEBEBEBEBEBEBEEE
+average {response_time: 9.091, turnaround_time: 55.000, waiting_time: 42.545}
+throughput: 0.0769 process completed per quantum
 
 ================================================================================
 RUN 3 ==========================================================================
 
 Process Queue:
 [
-	{id: K, arrival_time: 19, priority: 1, expected_run_time:  4}
-	{id: A, arrival_time: 24, priority: 3, expected_run_time:  8}
-	{id: B, arrival_time: 27, priority: 2, expected_run_time:  7}
-	{id: J, arrival_time: 28, priority: 4, expected_run_time: 20}
-	{id: H, arrival_time: 33, priority: 1, expected_run_time: 12}
-	{id: F, arrival_time: 33, priority: 2, expected_run_time: 11}
-	{id: D, arrival_time: 41, priority: 2, expected_run_time: 20}
-	{id: L, arrival_time: 63, priority: 3, expected_run_time:  1}
-	{id: C, arrival_time: 66, priority: 4, expected_run_time:  2}
-	{id: G, arrival_time: 70, priority: 4, expected_run_time: 14}
-	{id: E, arrival_time: 79, priority: 3, expected_run_time: 14}
-	{id: I, arrival_time: 91, priority: 4, expected_run_time:  9}
+	{id: L, arrival_time:  6, priority: 3, expected_run_time: 13}
+	{id: A, arrival_time:  9, priority: 1, expected_run_time: 17}
+	{id: D, arrival_time: 15, priority: 3, expected_run_time: 12}
+	{id: G, arrival_time: 25, priority: 1, expected_run_time: 19}
+	{id: F, arrival_time: 38, priority: 3, expected_run_time:  6}
+	{id: H, arrival_time: 38, priority: 3, expected_run_time:  1}
+	{id: I, arrival_time: 40, priority: 3, expected_run_time: 15}
+	{id: J, arrival_time: 54, priority: 3, expected_run_time: 11}
+	{id: B, arrival_time: 56, priority: 4, expected_run_time: 17}
+	{id: E, arrival_time: 71, priority: 2, expected_run_time: 19}
+	{id: K, arrival_time: 90, priority: 1, expected_run_time:  7}
+	{id: C, arrival_time: 96, priority: 4, expected_run_time: 16}
 ]
 
 FCFS
 0    5    10   15   20   25   30   35   40   45   50   55   60   65   70   75   80   85   90   95   100  
 |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    
-0000000000000000000KKKK0AAAAAAAABBBBBBBJJJJJJJJJJJJJJJJJJJJHHHHHHHHHHHHFFFFFFFFFFFDDDDDDDDDDDDDDDDDDDD
-average {response_time: 17.286, turnaround_time: 29.000, waiting_time: 17.286}
-throughput: 0.0686 process completed per quantum
+000000LLLLLLLLLLLLLAAAAAAAAAAAAAAAAADDDDDDDDDDDDGGGGGGGGGGGGGGGGGGGHFFFFFFIIIIIIIIIIIIIIIJJJJJJJJJJJ
+average {response_time: 22.750, turnaround_time: 34.500, waiting_time: 22.750}
+throughput: 0.0800 process completed per quantum
 
 SJF
 0    5    10   15   20   25   30   35   40   45   50   55   60   65   70   75   80   85   90   95   100  105  
 |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    
-0000000000000000000KKKK0AAAAAAAABBBBBBBFFFFFFFFFFFHHHHHHHHHHHHJJJJJJJJJJJJJJJJJJJJLCCEEEEEEEEEEEEEEIIIIIIIII
-average {response_time: 11.200, turnaround_time: 20.000, waiting_time: 11.200}
-throughput: 0.0926 process completed per quantum
+000000LLLLLLLLLLLLLDDDDDDDDDDDDAAAAAAAAAAAAAAAAAHFFFFFFJJJJJJJJJJJIIIIIIIIIIIIIIIBBBBBBBBBBBBBBBBBKKKKKKK
+average {response_time: 11.889, turnaround_time: 22.889, waiting_time: 11.889}
+throughput: 0.0857 process completed per quantum
 
 SRT
-0    5    10   15   20   25   30   35   40   45   50   55   60   65   70   75   80   85   90   95   100  105  110  115  120  
-|    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    
-0000000000000000000KKKK0AAAAAAAABBBBBBBFFFFFFFFFFFHHHHHHHHHHHHDLDDCCDDGGGGGGGGGGGGGGEEEEEEEEEEEEEEIIIIIIIIIDDDDDDDDDDDDDDD
-average {response_time: 5.545, turnaround_time: 18.455, waiting_time: 9.182}
-throughput: 0.0902 process completed per quantum
+0    5    10   15   20   25   30   35   40   45   50   55   60   65   70   75   80   85   90   95   100  105  
+|    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    
+000000LLLLLLLLLLLLLDDDDDDDDDDDDAAAAAAAHFFFFFFAAAAAAAAAAJJJJJJJJJJJIIIIIIIIIIIIIIIBBBBBBBBBKKKKKKKBBBBBBBB
+average {response_time: 8.778, turnaround_time: 21.333, waiting_time: 10.333}
+throughput: 0.0857 process completed per quantum
 
 RR
 0    5    10   15   20   25   30   35   40   45   50   55   60   65   70   75   80   85   90   95   100  105  110  115  120  125  130  135  140  
 |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    
-0000000000000000000KKKK0AAAABAJBAJBAHFJBAHFJBDHFJBDHFJBDHFJDHFJDHFLJDHCFJDHGCFJDHGFEJDHGFEJDHGEJIDGEJIDGEJIDGEJIDGEJIDGEJIDGEJIDGEIDGEIDGEDGEE
-average {response_time: 2.917, turnaround_time: 46.083, waiting_time: 35.917}
-throughput: 0.0845 process completed per quantum
-
-HPF - Non-Preemptive
-0    5    10   15   20   25   30   35   40   45   50   55   60   65   70   75   80   85   90   95   100  105  110  115  
-|    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    
-0000000000000000000KKKK0AAAAAAAABBBBBBBHHHHHHHHHHHHFFFFFFFFFFFDDDDDDDDDDDDDDDDDDDDLEEEEEEEEEEEEEEJJJJJJJJJJJJJJJJJJJJ
-average {response_time: 15.778, turnaround_time: 26.556, waiting_time: 15.778}
+000000LLLLALALALADLADLADLADLGADLGADLGADGAFHDGIAFDGIAFDGIAFDJGIBAFDJGIBAFJGIBEAJGIBEJGIBEJGIBEJKGIBEJKGIBEJKGIBEJKGIBEJKGIBEKGIBEKBEBEBEBEBEEEEE
+average {response_time: 3.455, turnaround_time: 57.455, waiting_time: 45.000}
 throughput: 0.0769 process completed per quantum
 
+HPF - Non-Preemptive
+0    5    10   15   20   25   30   35   40   45   50   55   60   65   70   75   80   85   90   95   100  
+|    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    
+000000LLLLLLLLLLLLLAAAAAAAAAAAAAAAAAGGGGGGGGGGGGGGGGGGGDDDDDDDDDDDDHFFFFFFEEEEEEEEEEEEEEEEEEEKKKKKKK
+average {response_time: 15.750, turnaround_time: 27.500, waiting_time: 15.750}
+throughput: 0.0800 process completed per quantum
+
 HPF - Preemptive
-0    5    10   15   20   25   30   35   40   45   50   55   60   65   70   75   80   85   90   95   100  105  110  115  120  125  130  
-|    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    
-0000000000000000000KKKK0AAABBBBBBHHHHHHHHHHHHBFDFDFDFDFDFDFDFDFDFDFDDDDDDDDDDALAEAEAEAEEEEEEEEEEEJCGJCGJGJGJGJGJGJGJGJGJGJGJGJGJJJJJJ
-average {response_time: 15.000, turnaround_time: 36.273, waiting_time: 26.000}
-throughput: 0.0827 process completed per quantum
+0    5    10   15   20   25   30   35   40   45   50   55   60   65   70   75   80   85   90   95   100  105  110  115  120  125  
+|    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    
+000000LLLAAAAAAAAAAAAAAAAAGGGGGGGGGGGGGGGGGGGLDHFILDFILDFIJLDFIJLDFIJLDEEEEEEEEEEEEEEEEEEEKKKKKKKFIJLDIJLDIJLDIJLDIJDIJDIJIJII
+average {response_time: 6.400, turnaround_time: 50.100, waiting_time: 38.100}
+throughput: 0.0794 process completed per quantum
 
 HPF - Non-Preemptive with Aging
 0    5    10   15   20   25   30   35   40   45   50   55   60   65   70   75   80   85   90   95   100  
 |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    
-0000000000000000000KKKK0AAAAAAAABBBBBBBHHHHHHHHHHHHFFFFFFFFFFFJJJJJJJJJJJJJJJJJJJJDDDDDDDDDDDDDDDDDDDD
-average {response_time: 14.857, turnaround_time: 26.571, waiting_time: 14.857}
-throughput: 0.0686 process completed per quantum
+000000LLLLLLLLLLLLLAAAAAAAAAAAAAAAAAGGGGGGGGGGGGGGGGGGGDDDDDDDDDDDDHFFFFFFJJJJJJJJJJJEEEEEEEEEEEEEEEEEEE
+average {response_time: 19.250, turnaround_time: 31.500, waiting_time: 19.250}
+throughput: 0.0769 process completed per quantum
 
 HPF - Preemptive with Aging
-0    5    10   15   20   25   30   35   40   45   50   55   60   65   70   75   80   85   90   95   100  105  110  115  120  125  130  
-|    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    
-0000000000000000000KKKK0AAABBBBBAHHHHBHFBAHFAJHFAJDHFAJDHFJDHFJDHFJDHFJDLFJDFJDFJDCJDCJDGJDGEJDGEJDGEJDGEJDGEJDGEJDGEJDGEDGEGEGEGEGEE
-average {response_time: 8.000, turnaround_time: 40.636, waiting_time: 30.364}
-throughput: 0.0827 process completed per quantum
+0    5    10   15   20   25   30   35   40   45   50   55   60   65   70   75   80   85   90   95   100  105  110  115  120  125  130  135  140  
+|    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    
+000000LLLAAAAAAAAAALALALALAGDLAGDLAGDLAGDLGDLGDLGDFGHDIFGDIFGDIFGDIJFGDIJFGBIJGEBIJGEBIJGEBIJGEKBIJGEKBIJGEKBIJEKBIJEKBIJEKBIEKBEBEBEBEBEBEBEEE
+average {response_time: 9.091, turnaround_time: 55.000, waiting_time: 42.545}
+throughput: 0.0769 process completed per quantum
 
 ================================================================================
 RUN 4 ==========================================================================
 
 Process Queue:
 [
-	{id: K, arrival_time: 19, priority: 1, expected_run_time:  4}
-	{id: A, arrival_time: 24, priority: 3, expected_run_time:  8}
-	{id: B, arrival_time: 27, priority: 2, expected_run_time:  7}
-	{id: J, arrival_time: 28, priority: 4, expected_run_time: 20}
-	{id: H, arrival_time: 33, priority: 1, expected_run_time: 12}
-	{id: F, arrival_time: 33, priority: 2, expected_run_time: 11}
-	{id: D, arrival_time: 41, priority: 2, expected_run_time: 20}
-	{id: L, arrival_time: 63, priority: 3, expected_run_time:  1}
-	{id: C, arrival_time: 66, priority: 4, expected_run_time:  2}
-	{id: G, arrival_time: 70, priority: 4, expected_run_time: 14}
-	{id: E, arrival_time: 79, priority: 3, expected_run_time: 14}
-	{id: I, arrival_time: 91, priority: 4, expected_run_time:  9}
+	{id: L, arrival_time:  6, priority: 3, expected_run_time: 13}
+	{id: A, arrival_time:  9, priority: 1, expected_run_time: 17}
+	{id: D, arrival_time: 15, priority: 3, expected_run_time: 12}
+	{id: G, arrival_time: 25, priority: 1, expected_run_time: 19}
+	{id: F, arrival_time: 38, priority: 3, expected_run_time:  6}
+	{id: H, arrival_time: 38, priority: 3, expected_run_time:  1}
+	{id: I, arrival_time: 40, priority: 3, expected_run_time: 15}
+	{id: J, arrival_time: 54, priority: 3, expected_run_time: 11}
+	{id: B, arrival_time: 56, priority: 4, expected_run_time: 17}
+	{id: E, arrival_time: 71, priority: 2, expected_run_time: 19}
+	{id: K, arrival_time: 90, priority: 1, expected_run_time:  7}
+	{id: C, arrival_time: 96, priority: 4, expected_run_time: 16}
 ]
 
 FCFS
 0    5    10   15   20   25   30   35   40   45   50   55   60   65   70   75   80   85   90   95   100  
 |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    
-0000000000000000000KKKK0AAAAAAAABBBBBBBJJJJJJJJJJJJJJJJJJJJHHHHHHHHHHHHFFFFFFFFFFFDDDDDDDDDDDDDDDDDDDD
-average {response_time: 17.286, turnaround_time: 29.000, waiting_time: 17.286}
-throughput: 0.0686 process completed per quantum
+000000LLLLLLLLLLLLLAAAAAAAAAAAAAAAAADDDDDDDDDDDDGGGGGGGGGGGGGGGGGGGHFFFFFFIIIIIIIIIIIIIIIJJJJJJJJJJJ
+average {response_time: 22.750, turnaround_time: 34.500, waiting_time: 22.750}
+throughput: 0.0800 process completed per quantum
 
 SJF
 0    5    10   15   20   25   30   35   40   45   50   55   60   65   70   75   80   85   90   95   100  105  
 |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    
-0000000000000000000KKKK0AAAAAAAABBBBBBBFFFFFFFFFFFHHHHHHHHHHHHJJJJJJJJJJJJJJJJJJJJLCCEEEEEEEEEEEEEEIIIIIIIII
-average {response_time: 11.200, turnaround_time: 20.000, waiting_time: 11.200}
-throughput: 0.0926 process completed per quantum
+000000LLLLLLLLLLLLLDDDDDDDDDDDDAAAAAAAAAAAAAAAAAHFFFFFFJJJJJJJJJJJIIIIIIIIIIIIIIIBBBBBBBBBBBBBBBBBKKKKKKK
+average {response_time: 11.889, turnaround_time: 22.889, waiting_time: 11.889}
+throughput: 0.0857 process completed per quantum
 
 SRT
-0    5    10   15   20   25   30   35   40   45   50   55   60   65   70   75   80   85   90   95   100  105  110  115  120  
-|    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    
-0000000000000000000KKKK0AAAAAAAABBBBBBBFFFFFFFFFFFHHHHHHHHHHHHDLDDCCDDGGGGGGGGGGGGGGEEEEEEEEEEEEEEIIIIIIIIIDDDDDDDDDDDDDDD
-average {response_time: 5.545, turnaround_time: 18.455, waiting_time: 9.182}
-throughput: 0.0902 process completed per quantum
+0    5    10   15   20   25   30   35   40   45   50   55   60   65   70   75   80   85   90   95   100  105  
+|    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    
+000000LLLLLLLLLLLLLDDDDDDDDDDDDAAAAAAAHFFFFFFAAAAAAAAAAJJJJJJJJJJJIIIIIIIIIIIIIIIBBBBBBBBBKKKKKKKBBBBBBBB
+average {response_time: 8.778, turnaround_time: 21.333, waiting_time: 10.333}
+throughput: 0.0857 process completed per quantum
 
 RR
 0    5    10   15   20   25   30   35   40   45   50   55   60   65   70   75   80   85   90   95   100  105  110  115  120  125  130  135  140  
 |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    
-0000000000000000000KKKK0AAAABAJBAJBAHFJBAHFJBDHFJBDHFJBDHFJDHFJDHFLJDHCFJDHGCFJDHGFEJDHGFEJDHGEJIDGEJIDGEJIDGEJIDGEJIDGEJIDGEJIDGEIDGEIDGEDGEE
-average {response_time: 2.917, turnaround_time: 46.083, waiting_time: 35.917}
-throughput: 0.0845 process completed per quantum
-
-HPF - Non-Preemptive
-0    5    10   15   20   25   30   35   40   45   50   55   60   65   70   75   80   85   90   95   100  105  110  115  
-|    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    
-0000000000000000000KKKK0AAAAAAAABBBBBBBHHHHHHHHHHHHFFFFFFFFFFFDDDDDDDDDDDDDDDDDDDDLEEEEEEEEEEEEEEJJJJJJJJJJJJJJJJJJJJ
-average {response_time: 15.778, turnaround_time: 26.556, waiting_time: 15.778}
+000000LLLLALALALADLADLADLADLGADLGADLGADGAFHDGIAFDGIAFDGIAFDJGIBAFDJGIBAFJGIBEAJGIBEJGIBEJGIBEJKGIBEJKGIBEJKGIBEJKGIBEJKGIBEKGIBEKBEBEBEBEBEEEEE
+average {response_time: 3.455, turnaround_time: 57.455, waiting_time: 45.000}
 throughput: 0.0769 process completed per quantum
 
+HPF - Non-Preemptive
+0    5    10   15   20   25   30   35   40   45   50   55   60   65   70   75   80   85   90   95   100  
+|    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    
+000000LLLLLLLLLLLLLAAAAAAAAAAAAAAAAAGGGGGGGGGGGGGGGGGGGDDDDDDDDDDDDHFFFFFFEEEEEEEEEEEEEEEEEEEKKKKKKK
+average {response_time: 15.750, turnaround_time: 27.500, waiting_time: 15.750}
+throughput: 0.0800 process completed per quantum
+
 HPF - Preemptive
-0    5    10   15   20   25   30   35   40   45   50   55   60   65   70   75   80   85   90   95   100  105  110  115  120  125  130  
-|    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    
-0000000000000000000KKKK0AAABBBBBBHHHHHHHHHHHHBFDFDFDFDFDFDFDFDFDFDFDDDDDDDDDDALAEAEAEAEEEEEEEEEEEJCGJCGJGJGJGJGJGJGJGJGJGJGJGJGJJJJJJ
-average {response_time: 15.000, turnaround_time: 36.273, waiting_time: 26.000}
-throughput: 0.0827 process completed per quantum
+0    5    10   15   20   25   30   35   40   45   50   55   60   65   70   75   80   85   90   95   100  105  110  115  120  125  
+|    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    
+000000LLLAAAAAAAAAAAAAAAAAGGGGGGGGGGGGGGGGGGGLDHFILDFILDFIJLDFIJLDFIJLDEEEEEEEEEEEEEEEEEEEKKKKKKKFIJLDIJLDIJLDIJLDIJDIJDIJIJII
+average {response_time: 6.400, turnaround_time: 50.100, waiting_time: 38.100}
+throughput: 0.0794 process completed per quantum
 
 HPF - Non-Preemptive with Aging
 0    5    10   15   20   25   30   35   40   45   50   55   60   65   70   75   80   85   90   95   100  
 |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    
-0000000000000000000KKKK0AAAAAAAABBBBBBBHHHHHHHHHHHHFFFFFFFFFFFJJJJJJJJJJJJJJJJJJJJDDDDDDDDDDDDDDDDDDDD
-average {response_time: 14.857, turnaround_time: 26.571, waiting_time: 14.857}
-throughput: 0.0686 process completed per quantum
+000000LLLLLLLLLLLLLAAAAAAAAAAAAAAAAAGGGGGGGGGGGGGGGGGGGDDDDDDDDDDDDHFFFFFFJJJJJJJJJJJEEEEEEEEEEEEEEEEEEE
+average {response_time: 19.250, turnaround_time: 31.500, waiting_time: 19.250}
+throughput: 0.0769 process completed per quantum
 
 HPF - Preemptive with Aging
-0    5    10   15   20   25   30   35   40   45   50   55   60   65   70   75   80   85   90   95   100  105  110  115  120  125  130  
-|    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    
-0000000000000000000KKKK0AAABBBBBAHHHHBHFBAHFAJHFAJDHFAJDHFJDHFJDHFJDHFJDLFJDFJDFJDCJDCJDGJDGEJDGEJDGEJDGEJDGEJDGEJDGEJDGEDGEGEGEGEGEE
-average {response_time: 8.000, turnaround_time: 40.636, waiting_time: 30.364}
-throughput: 0.0827 process completed per quantum
+0    5    10   15   20   25   30   35   40   45   50   55   60   65   70   75   80   85   90   95   100  105  110  115  120  125  130  135  140  
+|    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    
+000000LLLAAAAAAAAAALALALALAGDLAGDLAGDLAGDLGDLGDLGDFGHDIFGDIFGDIFGDIJFGDIJFGBIJGEBIJGEBIJGEBIJGEKBIJGEKBIJGEKBIJEKBIJEKBIJEKBIEKBEBEBEBEBEBEBEEE
+average {response_time: 9.091, turnaround_time: 55.000, waiting_time: 42.545}
+throughput: 0.0769 process completed per quantum
 
 ================================================================================
 RUN 5 ==========================================================================
 
 Process Queue:
 [
-	{id: K, arrival_time: 19, priority: 1, expected_run_time:  4}
-	{id: A, arrival_time: 24, priority: 3, expected_run_time:  8}
-	{id: B, arrival_time: 27, priority: 2, expected_run_time:  7}
-	{id: J, arrival_time: 28, priority: 4, expected_run_time: 20}
-	{id: H, arrival_time: 33, priority: 1, expected_run_time: 12}
-	{id: F, arrival_time: 33, priority: 2, expected_run_time: 11}
-	{id: D, arrival_time: 41, priority: 2, expected_run_time: 20}
-	{id: L, arrival_time: 63, priority: 3, expected_run_time:  1}
-	{id: C, arrival_time: 66, priority: 4, expected_run_time:  2}
-	{id: G, arrival_time: 70, priority: 4, expected_run_time: 14}
-	{id: E, arrival_time: 79, priority: 3, expected_run_time: 14}
-	{id: I, arrival_time: 91, priority: 4, expected_run_time:  9}
+	{id: L, arrival_time:  6, priority: 3, expected_run_time: 13}
+	{id: A, arrival_time:  9, priority: 1, expected_run_time: 17}
+	{id: D, arrival_time: 15, priority: 3, expected_run_time: 12}
+	{id: G, arrival_time: 25, priority: 1, expected_run_time: 19}
+	{id: F, arrival_time: 38, priority: 3, expected_run_time:  6}
+	{id: H, arrival_time: 38, priority: 3, expected_run_time:  1}
+	{id: I, arrival_time: 40, priority: 3, expected_run_time: 15}
+	{id: J, arrival_time: 54, priority: 3, expected_run_time: 11}
+	{id: B, arrival_time: 56, priority: 4, expected_run_time: 17}
+	{id: E, arrival_time: 71, priority: 2, expected_run_time: 19}
+	{id: K, arrival_time: 90, priority: 1, expected_run_time:  7}
+	{id: C, arrival_time: 96, priority: 4, expected_run_time: 16}
 ]
 
 FCFS
 0    5    10   15   20   25   30   35   40   45   50   55   60   65   70   75   80   85   90   95   100  
 |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    
-0000000000000000000KKKK0AAAAAAAABBBBBBBJJJJJJJJJJJJJJJJJJJJHHHHHHHHHHHHFFFFFFFFFFFDDDDDDDDDDDDDDDDDDDD
-average {response_time: 17.286, turnaround_time: 29.000, waiting_time: 17.286}
-throughput: 0.0686 process completed per quantum
+000000LLLLLLLLLLLLLAAAAAAAAAAAAAAAAADDDDDDDDDDDDGGGGGGGGGGGGGGGGGGGHFFFFFFIIIIIIIIIIIIIIIJJJJJJJJJJJ
+average {response_time: 22.750, turnaround_time: 34.500, waiting_time: 22.750}
+throughput: 0.0800 process completed per quantum
 
 SJF
 0    5    10   15   20   25   30   35   40   45   50   55   60   65   70   75   80   85   90   95   100  105  
 |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    
-0000000000000000000KKKK0AAAAAAAABBBBBBBFFFFFFFFFFFHHHHHHHHHHHHJJJJJJJJJJJJJJJJJJJJLCCEEEEEEEEEEEEEEIIIIIIIII
-average {response_time: 11.200, turnaround_time: 20.000, waiting_time: 11.200}
-throughput: 0.0926 process completed per quantum
+000000LLLLLLLLLLLLLDDDDDDDDDDDDAAAAAAAAAAAAAAAAAHFFFFFFJJJJJJJJJJJIIIIIIIIIIIIIIIBBBBBBBBBBBBBBBBBKKKKKKK
+average {response_time: 11.889, turnaround_time: 22.889, waiting_time: 11.889}
+throughput: 0.0857 process completed per quantum
 
 SRT
-0    5    10   15   20   25   30   35   40   45   50   55   60   65   70   75   80   85   90   95   100  105  110  115  120  
-|    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    
-0000000000000000000KKKK0AAAAAAAABBBBBBBFFFFFFFFFFFHHHHHHHHHHHHDLDDCCDDGGGGGGGGGGGGGGEEEEEEEEEEEEEEIIIIIIIIIDDDDDDDDDDDDDDD
-average {response_time: 5.545, turnaround_time: 18.455, waiting_time: 9.182}
-throughput: 0.0902 process completed per quantum
+0    5    10   15   20   25   30   35   40   45   50   55   60   65   70   75   80   85   90   95   100  105  
+|    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    
+000000LLLLLLLLLLLLLDDDDDDDDDDDDAAAAAAAHFFFFFFAAAAAAAAAAJJJJJJJJJJJIIIIIIIIIIIIIIIBBBBBBBBBKKKKKKKBBBBBBBB
+average {response_time: 8.778, turnaround_time: 21.333, waiting_time: 10.333}
+throughput: 0.0857 process completed per quantum
 
 RR
 0    5    10   15   20   25   30   35   40   45   50   55   60   65   70   75   80   85   90   95   100  105  110  115  120  125  130  135  140  
 |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    
-0000000000000000000KKKK0AAAABAJBAJBAHFJBAHFJBDHFJBDHFJBDHFJDHFJDHFLJDHCFJDHGCFJDHGFEJDHGFEJDHGEJIDGEJIDGEJIDGEJIDGEJIDGEJIDGEJIDGEIDGEIDGEDGEE
-average {response_time: 2.917, turnaround_time: 46.083, waiting_time: 35.917}
-throughput: 0.0845 process completed per quantum
-
-HPF - Non-Preemptive
-0    5    10   15   20   25   30   35   40   45   50   55   60   65   70   75   80   85   90   95   100  105  110  115  
-|    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    
-0000000000000000000KKKK0AAAAAAAABBBBBBBHHHHHHHHHHHHFFFFFFFFFFFDDDDDDDDDDDDDDDDDDDDLEEEEEEEEEEEEEEJJJJJJJJJJJJJJJJJJJJ
-average {response_time: 15.778, turnaround_time: 26.556, waiting_time: 15.778}
+000000LLLLALALALADLADLADLADLGADLGADLGADGAFHDGIAFDGIAFDGIAFDJGIBAFDJGIBAFJGIBEAJGIBEJGIBEJGIBEJKGIBEJKGIBEJKGIBEJKGIBEJKGIBEKGIBEKBEBEBEBEBEEEEE
+average {response_time: 3.455, turnaround_time: 57.455, waiting_time: 45.000}
 throughput: 0.0769 process completed per quantum
 
+HPF - Non-Preemptive
+0    5    10   15   20   25   30   35   40   45   50   55   60   65   70   75   80   85   90   95   100  
+|    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    
+000000LLLLLLLLLLLLLAAAAAAAAAAAAAAAAAGGGGGGGGGGGGGGGGGGGDDDDDDDDDDDDHFFFFFFEEEEEEEEEEEEEEEEEEEKKKKKKK
+average {response_time: 15.750, turnaround_time: 27.500, waiting_time: 15.750}
+throughput: 0.0800 process completed per quantum
+
 HPF - Preemptive
-0    5    10   15   20   25   30   35   40   45   50   55   60   65   70   75   80   85   90   95   100  105  110  115  120  125  130  
-|    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    
-0000000000000000000KKKK0AAABBBBBBHHHHHHHHHHHHBFDFDFDFDFDFDFDFDFDFDFDDDDDDDDDDALAEAEAEAEEEEEEEEEEEJCGJCGJGJGJGJGJGJGJGJGJGJGJGJGJJJJJJ
-average {response_time: 15.000, turnaround_time: 36.273, waiting_time: 26.000}
-throughput: 0.0827 process completed per quantum
+0    5    10   15   20   25   30   35   40   45   50   55   60   65   70   75   80   85   90   95   100  105  110  115  120  125  
+|    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    
+000000LLLAAAAAAAAAAAAAAAAAGGGGGGGGGGGGGGGGGGGLDHFILDFILDFIJLDFIJLDFIJLDEEEEEEEEEEEEEEEEEEEKKKKKKKFIJLDIJLDIJLDIJLDIJDIJDIJIJII
+average {response_time: 6.400, turnaround_time: 50.100, waiting_time: 38.100}
+throughput: 0.0794 process completed per quantum
 
 HPF - Non-Preemptive with Aging
 0    5    10   15   20   25   30   35   40   45   50   55   60   65   70   75   80   85   90   95   100  
 |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    
-0000000000000000000KKKK0AAAAAAAABBBBBBBHHHHHHHHHHHHFFFFFFFFFFFJJJJJJJJJJJJJJJJJJJJDDDDDDDDDDDDDDDDDDDD
-average {response_time: 14.857, turnaround_time: 26.571, waiting_time: 14.857}
-throughput: 0.0686 process completed per quantum
+000000LLLLLLLLLLLLLAAAAAAAAAAAAAAAAAGGGGGGGGGGGGGGGGGGGDDDDDDDDDDDDHFFFFFFJJJJJJJJJJJEEEEEEEEEEEEEEEEEEE
+average {response_time: 19.250, turnaround_time: 31.500, waiting_time: 19.250}
+throughput: 0.0769 process completed per quantum
 
 HPF - Preemptive with Aging
-0    5    10   15   20   25   30   35   40   45   50   55   60   65   70   75   80   85   90   95   100  105  110  115  120  125  130  
-|    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    
-0000000000000000000KKKK0AAABBBBBAHHHHBHFBAHFAJHFAJDHFAJDHFJDHFJDHFJDHFJDLFJDFJDFJDCJDCJDGJDGEJDGEJDGEJDGEJDGEJDGEJDGEJDGEDGEGEGEGEGEE
-average {response_time: 8.000, turnaround_time: 40.636, waiting_time: 30.364}
-throughput: 0.0827 process completed per quantum
+0    5    10   15   20   25   30   35   40   45   50   55   60   65   70   75   80   85   90   95   100  105  110  115  120  125  130  135  140  
+|    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    
+000000LLLAAAAAAAAAALALALALAGDLAGDLAGDLAGDLGDLGDLGDFGHDIFGDIFGDIFGDIJFGDIJFGBIJGEBIJGEBIJGEBIJGEKBIJGEKBIJGEKBIJEKBIJEKBIJEKBIEKBEBEBEBEBEBEBEEE
+average {response_time: 9.091, turnaround_time: 55.000, waiting_time: 42.545}
+throughput: 0.0769 process completed per quantum
 
 ================================================================================
 Total Results Over All Runs ====================================================
 
 FCFS
-average {response_time: 17.286, turnaround_time: 29.000, waiting_time: 17.286}
-throughput: 0.0686 process completed per quantum
+average {response_time: 22.750, turnaround_time: 34.500, waiting_time: 22.750}
+throughput: 0.0800 process completed per quantum
 
 SJF
-average {response_time: 11.200, turnaround_time: 20.000, waiting_time: 11.200}
-throughput: 0.0926 process completed per quantum
+average {response_time: 11.889, turnaround_time: 22.889, waiting_time: 11.889}
+throughput: 0.0857 process completed per quantum
 
 SRT
-average {response_time: 5.545, turnaround_time: 18.455, waiting_time: 9.182}
-throughput: 0.0902 process completed per quantum
+average {response_time: 8.778, turnaround_time: 21.333, waiting_time: 10.333}
+throughput: 0.0857 process completed per quantum
 
 RR
-average {response_time: 2.917, turnaround_time: 46.083, waiting_time: 35.917}
-throughput: 0.0845 process completed per quantum
-
-HPF - Non-Preemptive
-average {response_time: 15.778, turnaround_time: 26.556, waiting_time: 15.778}
+average {response_time: 3.455, turnaround_time: 57.455, waiting_time: 45.000}
 throughput: 0.0769 process completed per quantum
 
+HPF - Non-Preemptive
+average {response_time: 15.750, turnaround_time: 27.500, waiting_time: 15.750}
+throughput: 0.0800 process completed per quantum
+
 HPF - Preemptive
-average {response_time: 15.000, turnaround_time: 36.273, waiting_time: 26.000}
-throughput: 0.0827 process completed per quantum
+average {response_time: 6.400, turnaround_time: 50.100, waiting_time: 38.100}
+throughput: 0.0794 process completed per quantum
 
 HPF - Non-Preemptive with Aging
-average {response_time: 14.857, turnaround_time: 26.571, waiting_time: 14.857}
-throughput: 0.0686 process completed per quantum
+average {response_time: 19.250, turnaround_time: 31.500, waiting_time: 19.250}
+throughput: 0.0769 process completed per quantum
 
 HPF - Preemptive with Aging
-average {response_time: 8.036, turnaround_time: 40.745, waiting_time: 30.473}
-throughput: 0.0827 process completed per quantum
+average {response_time: 9.091, turnaround_time: 55.000, waiting_time: 42.545}
+throughput: 0.0769 process completed per quantum
 
 ================================================================================
 ================================================================================

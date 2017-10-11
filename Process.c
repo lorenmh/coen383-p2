@@ -36,7 +36,6 @@ void print_process_queue(process_queue_t const *process_queue) {
 process_queue_t *create_process_queue(int size) {
     process_t *newProcessArray = malloc(sizeof(process_t) * size);
 
-    srand(time(NULL));
     int seed_for_arrival = rand();
     int seed_for_run_time = rand();
     int seed_for_priority = rand();

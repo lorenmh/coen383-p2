@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 #include "MinHeap.h"
 #include "Output.h"
@@ -106,6 +107,7 @@ void run() {
 }
 
 int main(int argc, char* argv[]) {
+    srand(time(NULL));
     run();
     return 0;
 }
