@@ -23,7 +23,7 @@ void generate_result(process_queue_t *process_queue, result_t *result) {
 
     for (int i = 0; i < process_queue->size; ++i) {
         process_t *current_process = &(process_queue->entry)[i] ;
-        if (current_process->turnaround_time != UINT32_MAX) {
+        if (current_process->remaining_run_time == 0) {
             finished_process_count += 1;
             sum_response_time += current_process->response_time;
             sum_waiting_time += current_process->turnaround_time - current_process->expected_run_time;
@@ -43,8 +43,8 @@ void generate_result(process_queue_t *process_queue, result_t *result) {
 
 void print_result(result_t *result) {
     printf(
-        "average {response_time: %.2f, turnaround_time: %.2f, waiting_time: %.2f}\n"
-        "throughput: %.3f process completed per quantum\n",
+        "average {response_time: %.3f, turnaround_time: %.3f, waiting_time: %.3f}\n"
+        "throughput: %.4f process completed per quantum\n",
         result->avg_response_time,
         result->avg_turnaround_time,
         result->avg_waiting_time,
