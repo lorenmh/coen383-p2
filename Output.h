@@ -26,6 +26,7 @@ typedef struct {
  * @param history pointer to the history structure
  */
 void print_history(history_t *history);
+void print_result(result_t *result);
 
 
 /**

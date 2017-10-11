@@ -2,6 +2,8 @@
 // Created by Yujian Zhang on 10/3/17.
 //
 
+#include <string.h>
+
 #include "Output.h"
 #include "Process.h"
 
@@ -39,6 +41,21 @@ void generate_result(process_queue_t *process_queue, result_t *result) {
     result->throughput = (double)finished_process_count / (double)quanta_length;
 }
 
-void print_history(history_t *history) {
+void print_result(result_t *result) {
+    printf(
+        "average {response_time: %.2f, turnaround_time: %.2f, waiting_time: %.2f}\n"
+        "throughput: %.3f process completed per quantum\n",
+        result->avg_response_time,
+        result->avg_turnaround_time,
+        result->avg_waiting_time,
+        result->throughput
+    );
+}
 
+void print_history(history_t *history) {
+    int div_5 = strlen((char *)history) / 5;
+    for (int i = 0; i <= div_5; i++) printf("%-5d", i*5);
+    printf("\n");
+    for (int i = 0; i <= div_5; i++) printf("|    ");
+    printf("\n%s\n", (char *)history);
 }
