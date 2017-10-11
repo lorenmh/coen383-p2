@@ -9,6 +9,7 @@
 #define TIME_MULTIPLIER (10000)
 #define AGING_QUANTUM (5)
 #define RR_QUANTUM (1)
+#define MAX_PRIORITY_BOOST_QUANTUM (2)
 
 
 
@@ -26,61 +27,6 @@ extern scheduler_context rr_context;
 extern scheduler_context hpf_pe_context;
 
 void Scheduler(process_queue_t *pq, history_t *h, scheduler_context *scheduler_policy, bool with_aging);
-
-
-/**
- * First Come First Serve scheduler
- *
- * @param pq pointer to the process queue
- * @param h pointer to the result
- */
-void fcfs(process_queue_t *pq, history_t *h);
-
-
-/**
- * Shortest Job First scheduler
- *
- * @param pq pointer to the process queue
- * @param h pointer to the result
- */
-void sjf(process_queue_t *pq, history_t *h);
-
-
-/**
- * Shortest Remaining Time First scheduler
- *
- * @param pq pointer to the process queue
- * @param h pointer to the result
- */
-void srt(process_queue_t *pq, history_t *h);
-
-/**
- * Round Robin scheduler
- *
- * @param pq pointer to the process queue
- * @param h pointer to the result
- */
-void rr(process_queue_t *pq, history_t *h);
-
-/**
- * Highest Priority First, non-preemptive scheduler
- *
- * @param pq pointer to the process queue
- * @param h pointer to the result
- * @param with_aging whether use aging support or not
- */
-void hpf_npe(process_queue_t *pq, history_t *h, bool with_aging);
-
-/**
- * Highest Priority First, preemptive scheduler
- *
- * @param pq pointer to the process queue
- * @param h pointer to the result
- */
-void hpf_pe(process_queue_t *pq, history_t *h);
-
-
-
 
 
 

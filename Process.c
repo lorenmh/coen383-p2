@@ -56,7 +56,7 @@ process_queue_t *create_process_queue(int size) {
         newProcessArray[i].arrival_time = RandNum_get_random();
 
         newProcessArray[i].context_switch_time = newProcessArray[i].arrival_time;
-        newProcessArray[i].execution_time = 0;
+        newProcessArray[i].boost_execution_time = 0;
         newProcessArray[i].completed_flag = 0;
         newProcessArray[i].arrival_flag = 0;
         newProcessArray[i].turnaround_time = INT32_MAX;
@@ -88,6 +88,7 @@ process_queue_t *create_process_queue(int size) {
 
 void free_process_queue(process_queue_t *process_queue) {
     free(process_queue->entry);
+    free(process_queue);
 }
 
 process_queue_t *clone_process_queue(process_queue_t *process_queue) {

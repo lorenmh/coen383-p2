@@ -8,7 +8,7 @@
 #define MAX_ACCEPTABLE_ARRIVAL_TIME 99
 #define MAX_SERVICE_TIME 20
 
-#define INIT_SEED (3143211)
+#define INIT_SEED ((unsigned int)time(NULL))
 
 typedef struct {
     char id;
@@ -19,7 +19,7 @@ typedef struct {
     uint8_t completed_flag;
     uint8_t arrival_flag;
 
-    uint32_t execution_time;  // for shortest remaining time first 
+    uint32_t boost_execution_time;  // for shortest remaining time first
     uint32_t context_switch_time;  // for aging
     uint8_t virtual_priority; // for aging
 
