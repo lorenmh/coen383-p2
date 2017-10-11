@@ -9,22 +9,16 @@
 #include <stdint.h>
 #include "Process.h"
 
-typedef struct {
-    char *pid;
+#define HISTORY_BUF_SIZE 400
 
-    // total number of char in "pid" string, excluding '\0'
-    int size;
-} history_t;
+typedef char history_t[HISTORY_BUF_SIZE];
 
 typedef struct {
     double avg_response_time;
     double avg_turnaround_time;
     double avg_waiting_time;
-
-    double throughput; 
-
+    double throughput;
 } result_t;
-
 
 /**
  * print out the history into the console

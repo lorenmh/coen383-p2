@@ -10,78 +10,41 @@
 #define AGING_QUANTUM (5)
 #define RR_QUANTUM (1)
 
-
-
 typedef struct {
     uint32_t (*key_policy)(process_t *);
     uint32_t (*interrupt_policy)(process_t*);
 } scheduler_context;
 
+typedef struct {
+    uint32_t (*sort_key)(process_t*, int);
+    uint32_t (*process_run_time)(process_t*);
+    uint8_t is_aging;
+} policy_t;
 
-extern scheduler_context fcfs_context;
-extern scheduler_context srt_context;
-extern scheduler_context hpf_npe_context;
-extern scheduler_context sjf_context;
-extern scheduler_context rr_context;
-extern scheduler_context hpf_pe_context;
+extern policy_t fcfs_policy;
+extern policy_t sjf_policy;
+extern policy_t srt_policy;
+extern policy_t rr_policy;
+extern policy_t hpf_npe_policy;
+extern policy_t hpf_pe_policy;
+extern policy_t hpf_npe_age_policy;
+extern policy_t hpf_pe_age_policy;
 
-void Scheduler(process_queue_t *pq, history_t *h, scheduler_context *scheduler_policy, bool with_aging);
+uint32_t sort_by_arrival_time(process_t *process, int quantum);
 
+uint32_t sort_by_expected_run_time(process_t *process, int quantum);
 
-/**
- * First Come First Serve scheduler
- *
- * @param pq pointer to the process queue
- * @param h pointer to the result
- */
-void fcfs(process_queue_t *pq, history_t *h);
+uint32_t sort_by_remaining_run_time(process_t *process, int quantum);
 
+uint32_t sort_by_priority_and_last_run(process_t *process, int quantum);
 
-/**
- * Shortest Job First scheduler
- *
- * @param pq pointer to the process queue
- * @param h pointer to the result
- */
-void sjf(process_queue_t *pq, history_t *h);
+uint32_t sort_by_last_run(process_t *process, int quantum);
 
+uint32_t no_preempt_run_time(process_t *process);
 
-/**
- * Shortest Remaining Time First scheduler
- *
- * @param pq pointer to the process queue
- * @param h pointer to the result
- */
-void srt(process_queue_t *pq, history_t *h);
+uint32_t preempt_run_time(process_t *process);
 
-/**
- * Round Robin scheduler
- *
- * @param pq pointer to the process queue
- * @param h pointer to the result
- */
-void rr(process_queue_t *pq, history_t *h);
-
-/**
- * Highest Priority First, non-preemptive scheduler
- *
- * @param pq pointer to the process queue
- * @param h pointer to the result
- * @param with_aging whether use aging support or not
- */
-void hpf_npe(process_queue_t *pq, history_t *h, bool with_aging);
-
-/**
- * Highest Priority First, preemptive scheduler
- *
- * @param pq pointer to the process queue
- * @param h pointer to the result
- */
-void hpf_pe(process_queue_t *pq, history_t *h);
-
-
-
-
+void schedule(process_queue_t *pq, history_t *history, policy_t *policy);
 
 
 

@@ -57,6 +57,46 @@ void insert(heap_t *heap, uint32_t key, void *value) {
     }
 }
 
+void delete(heap_t *heap, int index) {
+    node_t *buf = heap->buf;
+
+    node_t swapped = buf[--(heap->size)];
+    buf[index] = swapped;
+
+    while (index <= heap->size / 2 - 1) {
+        uint16_t child0_index = index * 2 + 1;
+        uint16_t child1_index = index * 2 + 2;
+
+        // NULL for child0 or child1 means that the element does not exist
+        node_t *child0 = child0_index < heap->size ? &buf[child0_index] : NULL;
+        node_t *child1 = child1_index < heap->size ? &buf[child1_index] : NULL;
+
+        if (child0 == NULL) break;
+
+        // we only compare with the smallest child and swap if its smaller
+        node_t compared;
+        uint16_t compared_index = -1;
+
+        if (child1 == NULL || child0->key < child1->key) {
+            compared = *child0;
+            compared_index = child0_index;
+        } else {
+            compared = *child1;
+            compared_index = child1_index;
+        }
+
+        // no need to do any more swaps, break
+        if (swapped.key < compared.key) break;
+
+        // the child has a lower key so we swap
+        node_t tmp = buf[compared_index];
+        buf[compared_index] = buf[index];
+        buf[index] = tmp;
+
+        index = compared_index;
+    }
+}
+
 void *extract(heap_t *heap) {
     if (is_empty(heap)) return NULL;
 
