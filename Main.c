@@ -92,6 +92,7 @@ void run() {
         result_acc->throughput /= 5.0;
 
         print_result(result_acc);
+        printf("\n");
     }
 
     printf(
