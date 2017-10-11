@@ -35,6 +35,8 @@ heap_t *create_heap(void);
  */
 void insert(heap_t *heap, uint32_t key, void *value);
 
+void delete(heap_t *heap, int deleted_index);
+
 
 /**
  * Extracts the minimum value from the heap

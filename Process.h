@@ -6,24 +6,23 @@
 #define MIN_PRIORITY 1
 #define MAX_PRIORITY 4
 #define MAX_ACCEPTABLE_ARRIVAL_TIME 99
-#define MAX_SERVICE_TIME 20
+#define MAX_RUN_TIME 20
 
-#define INIT_SEED ((uint32_t)time(NULL))
+//#define INIT_SEED (3143211)
+#define INIT_SEED (314)
 
 typedef struct {
     char id;
     uint32_t arrival_time;
     uint32_t expected_run_time;
     uint32_t remaining_run_time;
+
+    uint8_t initial_priority; // for debug
     uint8_t priority;
-    uint8_t completed_flag;
-    uint8_t arrival_flag;
+    uint8_t has_already_run;
+    uint16_t age;
 
-    uint32_t execution_time;  // for shortest remaining time first 
-    uint32_t context_switch_time;  // for aging
-    uint8_t virtual_priority; // for aging
-
-    // for result part
+    // for results
     uint32_t turnaround_time;
     uint32_t response_time;
 } process_t;
@@ -32,7 +31,6 @@ typedef struct {
 typedef struct {
     process_t *entry;
     uint32_t size;
-
 } process_queue_t;
 
 

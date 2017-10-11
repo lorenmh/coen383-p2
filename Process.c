@@ -5,7 +5,6 @@
 #include <time.h>
 #include <string.h>
 
-
 char const *PIDS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
 int process_comparator(const void* p1, const void* p2) {
@@ -16,18 +15,11 @@ int process_comparator(const void* p1, const void* p2) {
 
 
 void print_process(process_t const *process) {
-    printf(
-        "{id: '%c'\tat: %d\t\tp: %d\t\tert: %d\t\ttat: %d\t\trt: %d\t\trrt: %d\t\t"
-        "cf: %d\t\taf: %d}",
+    printf("{id: %c, arrival_time: %2d, priority: %d, expected_run_time: %2d}",
         process->id,
         process->arrival_time,
         process->priority,
-        process->expected_run_time,
-        process->turnaround_time,
-        process->response_time,
-        process->remaining_run_time,
-        process->completed_flag,
-        process->arrival_flag
+        process->expected_run_time
     );
 }
 
@@ -44,7 +36,6 @@ void print_process_queue(process_queue_t const *process_queue) {
 process_queue_t *create_process_queue(int size) {
     process_t *newProcessArray = malloc(sizeof(process_t) * size);
 
-    srand(INIT_SEED);
     int seed_for_arrival = rand();
     int seed_for_run_time = rand();
     int seed_for_priority = rand();
@@ -55,16 +46,13 @@ process_queue_t *create_process_queue(int size) {
         newProcessArray[i].id = PIDS[i]; // will error if size > 52
         newProcessArray[i].arrival_time = RandNum_get_random();
 
-        newProcessArray[i].context_switch_time = 0;
-        newProcessArray[i].execution_time = 0;
-        newProcessArray[i].completed_flag = 0;
-        newProcessArray[i].arrival_flag = 0;
+        newProcessArray[i].has_already_run = 0;
         newProcessArray[i].turnaround_time = INT32_MAX;
         newProcessArray[i].response_time = INT32_MAX;
     }
 
     // expected run time
-    RandNum_set_parameter(seed_for_run_time, 1, MAX_SERVICE_TIME);
+    RandNum_set_parameter(seed_for_run_time, 1, MAX_RUN_TIME);
     for (int i = 0; i < size; ++i) {
         newProcessArray[i].expected_run_time = RandNum_get_random();
         newProcessArray[i].remaining_run_time = newProcessArray[i].expected_run_time;
@@ -74,16 +62,18 @@ process_queue_t *create_process_queue(int size) {
     RandNum_set_parameter(seed_for_priority, MIN_PRIORITY, MAX_PRIORITY);
     for (int i = 0; i < size; ++i) {
         uint8_t priority = (uint8_t)RandNum_get_random();
+        newProcessArray[i].initial_priority = priority;
         newProcessArray[i].priority = priority;
-        newProcessArray[i].virtual_priority = priority;
     }
 
     qsort(newProcessArray, (size_t)size, sizeof(process_t), process_comparator);
+
     process_queue_t *new_queue = malloc(sizeof(process_queue_t));
+
     new_queue->entry = newProcessArray;
     new_queue->size = (uint32_t)size;
-    return new_queue;
 
+    return new_queue;
 }
 
 void free_process_queue(process_queue_t *process_queue) {
